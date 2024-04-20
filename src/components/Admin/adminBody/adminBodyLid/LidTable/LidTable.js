@@ -14,7 +14,7 @@ function LidTable() {
 
   const {isNightMode} = useTheme()
 
-  const {show, handleShow, handleClose} = useModal()
+  const {handleShow} = useModal()
   
   const [showTableData, setShowTableData] = useState(true);
 

@@ -14,38 +14,38 @@ function App() {
 
 
 
-    // async function logMovies() {
-    //   const response = await fetch("https://my-one-api-uvs4.onrender.com/api/books");
-    //   const movies = await response.json();
-    //   console.log(movies);
-    // }
-    // useEffect(() => {
-    //   logMovies()
-    // })
+  // async function logMovies() {
+  //   const response = await fetch("https://my-one-api-uvs4.onrender.com/api/books");
+  //   const movies = await response.json();
+  //   console.log(movies);
+  // }
+  // useEffect(() => {
+  //   logMovies()
+  // })
 
   return (
     <div className="App">
-    <Routes>
-    <Route path="login" element={<Login />} />
-    <Route
-      path="adminBody"
-      element={
-        <AdminBody
-        />
-      }
-    >
-      <Route
-        path="lid"
-        element={
-          <LidTable/>
-        }
-      >
+      <Routes>
+        <Route path="login" element={<Login />} />
+        <Route
+          path="adminBody"
+          element={
+            <AdminBody
+            />
+          }
+        >
+          <Route
+            path="lid"
+            element={
+              <LidTable />
+            }
+          >
 
-      </Route>
-      <Route path=":pupil" element={<Pupil />} />
-      <Route path="groups" element={<GroupTable />} />
-    </Route>
-  </Routes>
+          </Route>
+          <Route path=":pupil" element={<Pupil />} />
+          <Route path="groups" element={<GroupTable />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
