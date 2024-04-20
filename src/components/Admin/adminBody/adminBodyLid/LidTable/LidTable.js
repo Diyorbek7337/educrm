@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import TableData from "./TableData/TableData";
 
 import { useTheme } from "../../../../context/ThemeContext";
-import Lidmodal from "./LidModal/Lidmodal";
+
 import Childrenmodal from "./LidModal/Childrenmodal";
 import { useModal } from "../../../../context/Addmodal";
  
@@ -16,7 +16,7 @@ function LidTable() {
 
   const {handleShow} = useModal()
   
-  const [showTableData, setShowTableData] = useState(true);
+  const [showTableData] = useState(true);
 
 
 

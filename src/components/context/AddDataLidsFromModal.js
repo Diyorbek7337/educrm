@@ -1,41 +1,152 @@
-import React, {createContext, useState, useContext} from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { useModal } from "../context/Addmodal"
 
+
+const API_URL = "https://nice-shift-goat.cyclic.app/pupils/post"
 const AddDataLid = createContext();
 
 export const useAddDataLid = () => {
-    return useContext(AddDataLid)
+  return useContext(AddDataLid)
 }
 
 
-export const AddDataLidProvider = ({children}) => {
+export const AddDataLidProvider = ({ children }) => {
 
 
-        const [addData, setAddData] = useState({
-            ism: "",
-            surname: "",
-            phone: Number(),
-            fphone: Number(),
-            address: "",
-            about: "",
-            year: Number(),
-            free: "",
-            subject1: "",
-            subject2: ""
-        })
 
-        const handleInputChangeDataLid = (e, types) => {
-            const { name, value } = e.target;
-            setAddData({
-              ...addData,
-              [types]: value.toUpperCase(),
-            });
-            
-          };
-  
-        return (
-          <AddDataLid.Provider value={{addData, handleInputChangeDataLid}}>
-            {children}
-          </AddDataLid.Provider>
-        );
-      
+
+
+
+  const { handleClose } = useModal()
+
+  const initialState = {
+    name: "",
+    surname: "",
+    phone: "",
+    fphone: "",
+    address: "",
+    about: "",
+    year: 0,
+    free: "",
+    subject1: "",
+    subject2: "",
+  };
+
+
+  const [addData, setAddData] = useState(initialState)
+
+
+  const handleInputChangeDataLid = (e, types) => {
+    const { names, value } = e.target;
+    setAddData({
+      ...addData,
+      [types]: value,
+
+    });
+
+  };
+
+  const [PeopleTables, setPeopleTables] = useState([]);
+  const [showWarning, setShowWarning] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const showWarningMessage = () => {
+    setShowWarning(true);
+    setTimeout(() => setShowWarning(false), 3000); // Hide the warning after 5 seconds
+  };
+
+  const showWDeleteMessage = () => {
+    setShowDelete(true);
+    setTimeout(() => setShowDelete(false), 3000); // Hide the warning after 5 seconds
+  };
+
+  const URL = "https://nice-shift-goat.cyclic.app/pupils";
+  const [loader, setLoader] = useState(true);
+
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    async function getData() {
+      try {
+        setLoader(true)
+        const response = await fetch(URL, { signal: abortController.signal });
+
+        if (!response.ok) {
+          // throw new Error(response.statusText)
+          throw new Error(response.statusText)
+        }
+        const data = await response.json();
+        setPeopleTables(data)
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching data:", error.message);
+      }
+      finally {
+        setLoader(false);
+      }
+
+    }
+    getData();
+    return () => {
+      abortController.abort();
+    };
+
+  }, []);
+
+
+
+
+  async function setdata(e) {
+    e.preventDefault(); // Prevent default form submission
+    const abortController = new AbortController();
+    try {
+      const response = await fetch(API_URL, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(addData),
+      });
+
+      if (response.ok) {
+        handleClose();
+        showWarningMessage();
+        // Fetch the latest data from the server
+        const updatedResponse = await fetch(URL, { signal: abortController.signal });
+        const updatedData = await updatedResponse.json();
+        setPeopleTables(updatedData);
+        setAddData({ ...addData });
+        
+      } else {
+        console.error('Error sending data to API:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error sending data to API:', error);
+    }
   }
+
+  async function deleteData(id) {
+    const abortController = new AbortController();
+    await fetch(`https://nice-shift-goat.cyclic.app/pupils/delete/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.text()) // or res.json()
+      .then((res) => console.log(res));
+
+    // Fetch the latest data from the server
+    const updatedResponse = await fetch(URL, { signal: abortController.signal });
+    const updatedData = await updatedResponse.json();
+    showWDeleteMessage();
+    setPeopleTables(updatedData);
+    setAddData(initialState);
+  }
+
+
+
+  return (
+    <AddDataLid.Provider value={{ addData, handleInputChangeDataLid, deleteData, setdata, PeopleTables, loader, showWarning, showDelete }}>
+      {children}
+    </AddDataLid.Provider>
+  );
+
+}

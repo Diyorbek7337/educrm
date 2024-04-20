@@ -1,13 +1,17 @@
 :root {
     --dark-mode: ##1F1F1F;
     --light-mode: #fff;
-    --light-header-color: rgba(0,0,0,0.05);
+    --light-header-color: #f7f8f8;
     --light-border-color: #9ca3af;
 }
 
 .breadcrumb-item a {
     color: #9ca3af;
     text-decoration: none;
+}
+.searchLid {
+    color: white;
+    width: 100%;
 }
 .lidTableHeader {
     padding: 10px 15px 10px 20px;
@@ -18,12 +22,12 @@
     border-bottom: 1px solid var(--light-border-color);
 }
 .lidTableHeader.dark {
-    background-color: rgba(8, 8, 8, 0.848);
+    background-color: #111827;
     border-bottom-color: var(--light-border-color) ;
 }
 
 .lidHeaderSecond.dark {
-    background-color: var(--dark-mode);
+    background-color: #111827;
 }
 
 .titleLists.dark {
@@ -50,26 +54,31 @@
     color: #fff;
 }
 .pagination .active {
-    background-color: #0d6efd !important;
+    background-color: #4F46E5 !important;
+    border: 1px solid #4F46E5;
 }
-/* .page-link:hover.dark {
-    background-color: #646870;
-    border: 1px solid #ffffff;
-} */
+.pagination:focus {
+    border-color: #4F46E5 !important;
+    box-shadow: 0 0 0 0.25rem #4F46E5 !important
+}
+.active>.page-link {
+    border-color: #4F46E5 !important;
+}
+
 .tables.darks {
     background-color: #2a3338 !important;
 }
 
 .tr.dark {
     background-color: rgb#2a3338 !important;
-    color: white;
+    color: rgb(209 213 219);
 }
 .searchRow.dark {
-    background-color: rgb(61, 68, 73);
-    color: white;
+    background-color: #111827;
+    color: rgb(209 213 219);
 }
 .searchRow.dark input::placeholder {
-    color: white;
+    color: rgb(209 213 219);
 }
 
 .searchRow{
@@ -81,10 +90,10 @@
   }
 .recordsMap.dark {
     background-color: #2a3338 !important;
-    color: white;
+    color: rgb(209 213 219);
 }
 .recordsMap:nth-child(2n-1).dark {
-    background-color: rgb(61, 68, 73) !important;
+    background-color: #111827 !important;
 }
 
 .recordsMap:hover.dark {
@@ -94,6 +103,10 @@
 .recordsMap:hover {
     background-color: #0aafdd;
     color: white;
+}
+.redFill {
+    color: red !important;
+    /* background-color: white; */
 }
 
 th, td {
@@ -117,9 +130,7 @@ td input {
     outline: none;
     padding-left: 65px;
 }
-.searchLid {
-    width: 100%;
-}
+
 .searchRow {
     /* border: none !important; */
     border: 1px solid black;

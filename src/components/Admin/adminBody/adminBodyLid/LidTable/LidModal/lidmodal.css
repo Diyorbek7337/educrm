@@ -4,6 +4,11 @@
     gap: 20px;
     
 }
+.modal-content {
+    width: 80%;
+    margin: 0 auto;
+    /* position:  relative !important; */
+}
 .inputForm {
     width: 50%;
 }
@@ -12,4 +17,98 @@
 }
 select, option {
     cursor: pointer !important;
+}
+.modal-body {
+    /* padding-bottom: 60px; */
+    position: relative !important;
+}
+.nfound.dark {
+    color: white;
+}
+.nfound {
+    color: black;
+}
+.loading {
+    color: red;
+}
+tbody {
+    position: relative;
+}
+.spinner-border {
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    width: 3em !important;
+    height: 3em !important;
+    color: #0D6EFD !important;
+    border-width: 5px !important;
+}
+.btn-success {
+    margin: 20px 0 0 0; 
+    width: 100%;
+    display: block;
+}
+.modalAlert {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 30%;
+    text-align: center;
+    background-color: white;
+    color: green;
+    padding: 20px 30px;
+    border: 1px solid green;
+    border-radius: 10px;
+}
+.delete {
+    border: none;
+    background-color: red;
+    padding: 5px 8px;
+    border-radius: 5px;
+    color: white;
+}
+.updates {
+    border: none;
+    background-color: rgb(0, 157, 255);
+    padding: 5px 8px;
+    border-radius: 5px;
+    color: white;
+}
+.actions {
+    display: flex;
+    gap: 5px;
+}
+.warning-message{
+    color: #0ad406;
+    /* backdrop-filter: blur(10px); */
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+    width: 20%;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow:  5px 5px 30px #2a9343,
+    0px 0px 30px #30384e;
+    border: 1px solid #2a9343;
+    position: absolute;
+    z-index: 1;
+    /* left: 50%;
+    top: 50%; */
+    transform: translate(150%, 80%);
+    font-size: 20px;
+}
+.warning-message.dark {
+    background-color: #191a1b;
+    color: #0ad406;
+    backdrop-filter: blur(10px);
+    
+}
+.warning-message.delete {
+    box-shadow:  5px 5px 30px #e03d3d,
+    0px 0px 30px #30384e;
+    border: 1px solid #e03d3d;
+}
+.checkFill {
+    font-size: 30px;
+    margin-bottom: 10px;
 }

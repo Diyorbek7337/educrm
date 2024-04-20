@@ -1,13 +1,15 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import LidTable from "./components/Admin/adminBody/adminBodyLid/LidTable/LidTable";
 import AdminBody from "./components/Admin/adminBody/AdminBody";
 import Pupil from "./components/Admin/adminBody/adminBodyLid/pupilTable/Pupil";
 import GroupTable from "./components/Admin/adminBody/adminBodyLid/groupTable/GroupTable";
 import Login from "./components/login/Login";
-import React, { useState, useEffect } from "react";
-import AddLids from "./components/Admin/adminBody/adminBodyLid/LidTable/addLids/AddLids";
+import Childrenmodal from "./components/Admin/adminBody/adminBodyLid/LidTable/LidModal/Childrenmodal";
+import TableData from "./components/Admin/adminBody/adminBodyLid/LidTable/TableData/TableData";
+import StudentDetails from "./components/Admin/adminBody/adminBodyLid/LidTable/Student/StudentDetails";
+
 
 function App() {
 
@@ -40,8 +42,9 @@ function App() {
               <LidTable />
             }
           >
-
+           
           </Route>
+          <Route path=":id" element={<StudentDetails />} />
           <Route path=":pupil" element={<Pupil />} />
           <Route path="groups" element={<GroupTable />} />
         </Route>

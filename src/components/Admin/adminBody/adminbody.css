@@ -28,7 +28,7 @@ ul {
     background-color: rgba(8, 8, 8, 0.848);
 }
 .mainBody.dark {
-    background-color: #121212;
+    background-color: #111827;
 }
 .leftMenuItem {
     display: flex;
@@ -42,9 +42,9 @@ ul {
 }
 
 .leftMenuItem:hover {
-    background-color: #0d6efd;
+    background-color: rgb(99 102 241);
     color: white;
-    width: 80%;
+    width: 100%;
     border-radius: 0px 12px 12px 0px;
 }
 div.leftMenuItem {

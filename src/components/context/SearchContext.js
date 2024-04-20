@@ -1,5 +1,5 @@
-import React, {createContext, useState, useContext} from "react";
-import PeopleTables from "../json files/people.json"
+import React, {createContext, useState, useContext, useEffect} from "react";
+
 
 
 const SearchContext = createContext();
@@ -8,6 +8,7 @@ const SearchContext = createContext();
 export const useSearch = () => {
     return useContext(SearchContext)
 }
+
 
 
 export const SearchProvider = ({children}) => {
@@ -20,8 +21,26 @@ export const SearchProvider = ({children}) => {
         category6: '',
       });
     
+      const [PeopleTables, setPeopleTables] = useState([])
+      const URL = "https://nice-shift-goat.cyclic.app/pupils"
+    
+      useEffect(() => {
+        async function getData() {
+          try {
+            const response = await fetch(URL);
+            const data = await response.json();
+            // setPeopleTables(data);
+            setPeopleTables(data);
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+         
+        }
+        getData()
+      }, [URL]);
+
       const handleInputChange = (e, category) => {
-        const { name, value } = e.target;
+        const { names, value } = e.target;
         setSearchValues({
           ...searchValues,
           [category]: value.toLowerCase(),
