@@ -9,43 +9,31 @@ import Login from "./components/login/Login";
 import Childrenmodal from "./components/Admin/adminBody/adminBodyLid/LidTable/LidModal/Childrenmodal";
 import TableData from "./components/Admin/adminBody/adminBodyLid/LidTable/TableData/TableData";
 import StudentDetails from "./components/Admin/adminBody/adminBodyLid/LidTable/Student/StudentDetails";
-
+import { useAddDataLid } from "./components/context/AddDataLidsFromModal";
 
 function App() {
 
 
+  const {PeopleTables} = useAddDataLid()
 
 
-  // async function logMovies() {
-  //   const response = await fetch("https://my-one-api-uvs4.onrender.com/api/books");
-  //   const movies = await response.json();
-  //   console.log(movies);
-  // }
-  // useEffect(() => {
-  //   logMovies()
-  // })
 
   return (
     <div className="App">
       <Routes>
         <Route path="login" element={<Login />} />
-        <Route
-          path="adminBody"
-          element={
-            <AdminBody
-            />
-          }
-        >
-          <Route
-            path="lid"
-            element={
-              <LidTable />
-            }
-          >
-           
-          </Route>
-          <Route path=":id" element={<StudentDetails />} />
-          <Route path=":pupil" element={<Pupil />} />
+        <Route path="adminBody" element={<AdminBody/>}>
+        {PeopleTables.map((data) => (
+              <Route
+                key={data._id}
+                path={`${data._id}`}
+                element={<StudentDetails id={data._id} />} // Pass id as prop to StudentDetails
+              />
+            ))}
+          <Route path="lid"element={<LidTable />}/>
+          
+          
+          <Route path="pupil" element={<Pupil />} />
           <Route path="groups" element={<GroupTable />} />
         </Route>
       </Routes>

@@ -1,0 +1,133 @@
+/* @import 'bootstrap/dist/css/bootstrap.min.css'; */
+
+.lidDetailBox {
+    padding: 20px 0;
+}
+.trashLid {
+    background-color: transparent !important;
+    color: red;
+}
+.deleteLidDetail {
+    border: none;
+    padding: 10px 15px;
+    background-color: red;
+    border-radius: 5px;
+}
+.deleteLidDetail:hover {
+    background-color: rgb(223, 0, 0);
+    cursor: pointer;
+    color: white;
+}
+.deleteLidDetail p {
+    margin: 0;
+    color: white;
+    
+}
+.addLidDetailPupil {
+    background-color: #3b5998;
+}
+.addLidDetailPupil:hover {
+    background-color: #2d4373;
+    cursor: pointer;
+    color: white;
+}
+.lidDirectionButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+}
+.lidDetailHeader {
+    border-bottom: 1px solid #fff;
+    padding: 0 20px 20px;
+}
+.lidDetailAvatar img{
+    width: 100%;
+}
+.lidDetailAvatar {
+    width: 100px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+.lidDetailFullName {
+    color: white;
+}
+.lidDetailBodyLeft {
+    width: 25%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px 0;
+    background-color: #1b2127;
+    border-radius: 8px;
+}
+.lidDetailBodyRight {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px 0;
+    background-color: #1b2127;
+    border-radius: 8px;
+    width: 75%;
+}
+.lidDetailBody {
+    padding: 50px 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.lidDetailBodyLeftHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.567);
+    padding-bottom: 20px;
+}
+.lidDetailBodyLeftBodyItem {
+    padding: 20px 20px 0;
+}
+.lidDetailBodyLeftBodyItemTitle {
+    color: #ccc;
+    font-weight: 600;
+}
+.lidDetailContentTitle {
+    color: rgba(255, 255, 255, 0.725);
+    font-size: 14px;
+    font-weight: 600;
+}
+.lidDetailContentInfo {
+    color: #ccc;
+    font-style: italic;
+    font-size: 14px;
+    margin-left: 5px;
+}
+.editDetail {
+    background-color: rgb(0, 86, 57);
+    color: white;
+}
+.editDetail:hover {
+    background-color: rgb(0, 68, 51) ; 
+}
+.lidDetailContentInfoEdit {
+    text-align: end;
+}
+.editIcon {
+    vertical-align: middle;
+    display: inline-block;
+}
+.editDetail span {
+    vertical-align: middle;
+    display: inline-block;
+}
+.lidDetailRightTop {
+    padding: 10px 30px;
+}
+.lidDetailLabel {
+    color: white;
+    font-size: 16px;
+}
+.lidDetailLabel span {
+    color: red;
+    font-weight: 600;
+}
+.aboutCourse {
+    font-size: 20px;
+}
+.lidDetailForm {
+    width: 30%;
+}

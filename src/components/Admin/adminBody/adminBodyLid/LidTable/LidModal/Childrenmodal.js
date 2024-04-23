@@ -55,7 +55,7 @@ function Childrenmodal() {
                         </Form.Group> 
                         <Form.Group className="mb-3 inputForm" controlId="formBasicAge">
                             <Form.Label>Yoshini kiriting</Form.Label>
-                            <Form.Control type="number" placeholder="Yoshini kiriting" value={addData.year} required onChange={(e) => handleInputChangeDataLid(e, 'year')}/>
+                            <Form.Control type="date" placeholder="Yoshini kiriting" value={addData.year} required onChange={(e) => handleInputChangeDataLid(e, 'year')}/>
                         </Form.Group>
                     </div>
                     <div className='formGroup'>

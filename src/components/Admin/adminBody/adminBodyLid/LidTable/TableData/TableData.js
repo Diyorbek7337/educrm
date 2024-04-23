@@ -9,6 +9,7 @@
   import { RxUpdate } from "react-icons/rx";
   import { PiSealCheckFill } from "react-icons/pi";
   import { Link, NavLink } from 'react-router-dom';
+  import { MdVisibility } from "react-icons/md";
 
 
   function TableData() {
@@ -167,7 +168,7 @@
 
               {filteredResults.length > 0 ? (
                 filteredResults.map((peopleTable, index) => (
-                  <Link to={`/adminBody/lid/${peopleTable._id}`}>
+                  <Link to={`/adminBody/${peopleTable._id}`}>
                     <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
                      
                      <td>{peopleTable[index+1]}</td>
@@ -194,7 +195,9 @@
                       <td>{peopleTable.free}</td>
                       <td className='actions'>
                         <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>
-                        <button className='updates'><RxUpdate /></button>
+                        <Link to={`/adminBody/${peopleTable._id}`}>
+                        <button  className='visible'><MdVisibility /></button>
+                        </Link>
                       </td>
                     </tr>
                   ))
