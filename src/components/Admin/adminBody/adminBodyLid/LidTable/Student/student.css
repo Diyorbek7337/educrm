@@ -129,5 +129,17 @@
     font-size: 20px;
 }
 .lidDetailForm {
-    width: 30%;
+    width: 33%;
+}
+
+.lidDetailRightTopContentItem {
+    display: flex;
+    gap: 30px;
+}
+.lidDetailSelectTitle {
+    color: #b0afaf;
+}
+.wordNumber {
+    margin-top: 10px;
+    color: white;
 }

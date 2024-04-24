@@ -8,11 +8,91 @@ import Form from 'react-bootstrap/Form';
 
 function StudentDetails({ id }) {
   // const { id } = useParams();
-  const [student, setStudent] = useState(null);
+  const [student, setStudent] = useState(0);
   const { isNightMode } = useTheme();
   const URL = `https://nice-shift-goat.cyclic.app/pupils/${id}`;
   const [loader, setLoader] = useState(true);
 
+const [numberWords, setNumberWords] = useState();
+  function numberToWords(numberWords) {
+    const units = ['', 'bir', 'ikki', 'uch', "to'rt", 'besh', 'olti', 'yetti', 'sakkiz', "to'qqiz"];
+    const teens = ['', "o'n bir", "o'n ikki", "o'n uch", "o'n to'rt", "o'n besh", "o'n olti", "o'n yetti", "o'n sakkiz", "o'n to'qqiz"];
+    const tens = ['', "o'n", 'yigirma', "o'ttiz", 'qirq', 'ellik', 'oltmish', 'yetmish', 'sakson', "to'qson"];
+
+    if (numberWords === 0) return 'zero';
+
+    let word = '';
+
+    if (numberWords >= 10000000) {
+      word += tens[Math.floor(numberWords / 10000000)] + ' ';
+      if(numberWords % 10000000 === 0) word += 'million'
+      if(numberWords < 11000000 && numberWords > 99999999 ) {
+        word += tens[Math.floor(numberWords / 10000000)] + ' million ';
+      }
+      numberWords %= 10000000;
+  }
+
+
+    if (numberWords >= 1000000) {
+      word += units[Math.floor(numberWords / 1000000)] + ' million ';
+      numberWords %= 1000000;
+  }
+
+    if (numberWords >= 100000) {
+      if (numberWords <= 999999) {
+          word += units[Math.floor(numberWords / 100000)] + ' yuz ';
+      } else {
+          word += tens[Math.floor(numberWords / 100000)] + ' ming ';
+      }
+      if(numberWords % 100000 === 0) word += 'ming ';
+      numberWords %= 100000;
+  }
+
+    if (numberWords >= 10000) {
+      if (numberWords <= 99999) {
+          word += tens[Math.floor(numberWords / 10000)] + ' ';
+      } 
+      else {
+        word += units[Math.floor(numberWords / 10000)] + ' ming ';
+    }
+    if(numberWords % 10000 === 0) word += 'ming ';
+      numberWords %= 10000;
+  }
+ 
+
+    if (numberWords >= 1000) {
+      word += units[Math.floor(numberWords / 1000)] + ' ming ';
+      if(numberWords % 1000 === 0) word += '';
+      numberWords %= 1000;
+  }
+
+    // Handle hundreds
+    if (numberWords >= 100) {
+        word += units[Math.floor(numberWords / 100)] + ' yuz ';
+        if(numberWords % 100 === 0) word += '';
+        numberWords %= 100;
+    }
+
+    // Handle tens and units
+    if (numberWords > 0) {
+        if (numberWords >= 10) {
+            word += tens[Math.floor(numberWords / 10)] + ' ';
+            numberWords %= 10;
+        } else if (numberWords >= 11 && numberWords <= 19) {
+            word += teens[numberWords - 10] + ' ';
+            numberWords = 0; // Skip units for teens
+        }
+        if(numberWords % 10 === 0) word += '';
+        if (numberWords > 0) {
+            word += units[numberWords] + ' ';
+            if(numberWords % 1 === 0) word += ' ';
+        }
+
+    }
+
+    return word.trim();
+}
+const wordForm = numberToWords(numberWords)
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -100,7 +180,7 @@ function StudentDetails({ id }) {
                   <div className='formGroupSelect lidDetailForm'>
                     <Form.Label className="lidDetailLabel"><span>*</span> O'quv holati</Form.Label>
                     <Form.Select aria-label="Default select example" required >
-                      <option>Tanlash</option>
+                      <option className="lidDetailSelectTitle">Tanlash</option>
                       <option value="boshlamagan">Hali boshlamagan</option>
                       <option value="oqimoqda">Ayni vaqtda o'qimoqda</option>
                       <option value="yakunlagan">Yakunlagan</option>
@@ -110,7 +190,7 @@ function StudentDetails({ id }) {
                   <div className='formGroupSelect lidDetailForm'>
                     <Form.Label className="lidDetailLabel"><span>*</span> Kurs muddati</Form.Label>
                     <Form.Select aria-label="Default select example" required >
-                      <option>Tanlash</option>
+                      <option className="lidDetailSelectTitle">Tanlash</option>
                       <option value="one">1</option>
                       <option value="two">2</option>
                       <option value="three">3</option>
@@ -119,7 +199,18 @@ function StudentDetails({ id }) {
                       <option value="six">6</option>
                       <option value="seven">7</option>
                       <option value="eight">8</option>
+                      <option value="nine">9</option>
+                      <option value="ten">10</option>
+                      <option value="eleven">11</option>
+                      <option value="twelve">12</option>
                     </Form.Select>
+                  </div>
+                  <div className='formGroupSelect lidDetailForm'>
+                    <Form.Label className="lidDetailLabel"><span>*</span> Kurs narxi</Form.Label>
+                    <Form.Group controlId="formBasicAddress">
+                            <Form.Control type="text" placeholder="Kurs narxi"  required value={numberWords} onChange={(e) => setNumberWords(e.target.value)}/>
+                            <p className="wordNumber">{wordForm} so'm</p>
+                        </Form.Group> 
                   </div>
                 </div>
               </Form>
