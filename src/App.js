@@ -16,7 +16,19 @@ function App() {
 
   const {PeopleTables} = useAddDataLid()
 
-
+  const pupil = {
+    name: "akbar",
+    surname: "ali",
+    address: "ibn sino",
+    born: "2000",
+    pNumber: "+998-(99)-999-99-99",
+    parentsNumber: "+998-(99)-999-99-99",
+    sub1: "eng",
+    sub2: "frontend",
+    freeTime: "15:00 - 17:00",
+    date: "22-22-2222"
+  }
+  
 
   return (
     <div className="App">
