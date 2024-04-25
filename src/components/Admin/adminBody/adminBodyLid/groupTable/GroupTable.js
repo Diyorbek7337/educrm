@@ -19,7 +19,7 @@ function GroupTable() {
   const recordsPerPage = 12;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
-  const records = PeopleTables.slice(firstIndex, lastIndex);
+  const records = PeopleTables.slice(firstIndex, lastIndex); // peopleTablesni yangi jsonga o'zgartirishing kerak
   const npage = Math.ceil(PeopleTables.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
@@ -78,13 +78,13 @@ function GroupTable() {
           <thead>
             <tr className={isNightMode ? 'tr' : 'tr dark'}>
               <th className='tartib'>No.</th>
-              <th className='ism'>Ism</th>
-              <th className="familiya">Familiya</th>
-              <th className="raqam">Telefon raqam</th>
-              <th className="haqida">Markaz haqida</th>
-              <th className="guruh">Fanlar</th>
-              <th className="sinov">Bo'sh vaqt</th>
-              <th className='actions'>Actions</th>
+              <th className='ism'>Guruh nomi</th>
+              <th className="familiya">Fan nomi</th>
+              <th className="raqam">O'qituvchi F.I.SH</th>
+              <th className="haqida">Xona</th>
+              <th className="guruh">Dars kunlari</th>
+              <th className="sinov">Dars vaqti</th>
+              <th className='actions'>Boshqaruv</th>
             </tr>
           </thead>
           <tbody>
