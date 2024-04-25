@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "groupName": "1-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "08:00 - 10:00"
+    },
+    {
+        "id": 2,
+        "groupName": "2-guruh",
+        "subName": "matematika",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "08:00 - 12:00"
+    },
+    {
+        "id": 3,
+        "groupName": "3-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari tili",
+        "lessTime": "10:00 - 12:00"
+    },
+    {
+        "id": 4,
+        "groupName": "4-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "13:00 - 15:00"
+    },
+    {
+        "id": 5,
+        "groupName": "5-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "15:00 - 17:00"
+    },
+    {
+        "id": 6,
+        "groupName": "6-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "13:00 - 17:00"
+    },
+    {
+        "id": 7,
+        "groupName": "7-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "08:00 - 10:00"
+    },
+    {
+        "id": 8,
+        "groupName": "8-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "08:00 - 10:00"
+    },
+    {
+        "id": 9,
+        "groupName": "9-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "08:00 - 10:00"
+    },
+    {
+        "id": 10,
+        "groupName": "10-guruh",
+        "subName": "ingliz tili",
+        "techName": "Abduqayumov Diyorbek",
+        "classRoom": "5-xona",
+        "lessDay": "Juft kunlari",
+        "lessTime": "08:00 - 10:00"
+    }
+]

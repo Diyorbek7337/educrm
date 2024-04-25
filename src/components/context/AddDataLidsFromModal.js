@@ -116,7 +116,7 @@ export const AddDataLidProvider = ({ children }) => {
         const updatedData = await updatedResponse.json();
         setPeopleTables(updatedData);
         setAddData({ ...addData });
-        
+
       } else {
         console.error('Error sending data to API:', response.statusText);
       }

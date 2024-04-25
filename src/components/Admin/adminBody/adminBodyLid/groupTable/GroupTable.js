@@ -1,26 +1,25 @@
-import React, {  useState } from 'react';
-import {useSearch} from '../../../../context/SearchContext'
+import React, { useState } from 'react';
+import { useSearch } from '../../../../context/SearchContext'
 import { useTheme } from '../../../../context/ThemeContext';
 import Spinner from 'react-bootstrap/Spinner'
-import {useAddDataLid}  from '../../../../context/AddDataLidsFromModal'
+import { useAddDataLid } from '../../../../context/AddDataLidsFromModal'
 import { PiSealCheckFill } from "react-icons/pi";
-  import { Link, NavLink } from 'react-router-dom';
-  import { MdVisibility } from "react-icons/md";
-  import { MdDelete } from "react-icons/md";
+import { Link, NavLink } from 'react-router-dom';
+import { MdVisibility } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import GroupJson from "../../../../json files/groups.json"
 
 function GroupTable() {
+  const { deleteData, PeopleTables, loader, showWarning, showDelete } = useAddDataLid()
 
-  const {deleteData, PeopleTables, loader, showWarning, showDelete} = useAddDataLid()
-
-  const {searchValues, handleInputChange, filteredResults} = useSearch()
-  
+  const { searchValues, handleInputChange, filteredResults } = useSearch()
   const { isNightMode } = useTheme("")
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 12;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
-  const records = PeopleTables.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(PeopleTables.length / recordsPerPage);
+  const records = GroupJson.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(GroupJson.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
 
@@ -38,18 +37,12 @@ function GroupTable() {
       setCurrentPage(currentPage + 1)
     }
   }
-
-
-
-
-
-
   return (
     <div className='groupTable'>
-       <div className={isNightMode ? 'lidHeaderSecond' : 'lidHeaderSecond dark'}>
-        
+      <div className={isNightMode ? 'lidHeaderSecond' : 'lidHeaderSecond dark'}>
 
-        <h2 className={isNightMode ? 'titleLists' : 'titleLists dark'}>Lidlar ro'yhati</h2>
+
+        <h2 className={isNightMode ? 'titleLists' : 'titleLists dark'}>Guruhlar ro'yhati</h2>
         <ul className="pagination">
           <li className="page-item">
             <a href="#" className={isNightMode ? "page-link" : "page-link dark"} onClick={prePage}>Prev</a>
@@ -67,24 +60,24 @@ function GroupTable() {
         </ul>
       </div>
       <div className={isNightMode ? 'lidTableBody' : 'lidTableBody dark'}>
-      {showWarning && <div className={isNightMode ? 'warning-message' : 'warning-message dark'}>
-      <PiSealCheckFill  className='checkFill'/>
-      <p>Lid muvaffaqiyatli qo'shildi!</p></div>}
-      {showDelete && <div className={isNightMode ? 'warning-message delete' : 'warning-message dark delete'}>
-      <PiSealCheckFill  className='checkFill redFill'/>
-      <p className='redFill'>Lid o'chirildi!</p></div>}
-      
-        <table  className={isNightMode ? "tables" : "tables darks"}>
+        {showWarning && <div className={isNightMode ? 'warning-message' : 'warning-message dark'}>
+          <PiSealCheckFill className='checkFill' />
+          <p>Lid muvaffaqiyatli qo'shildi!</p></div>}
+        {showDelete && <div className={isNightMode ? 'warning-message delete' : 'warning-message dark delete'}>
+          <PiSealCheckFill className='checkFill redFill' />
+          <p className='redFill'>Lid o'chirildi!</p></div>}
+
+        <table className={isNightMode ? "tables" : "tables darks"}>
           <thead>
             <tr className={isNightMode ? 'tr' : 'tr dark'}>
               <th className='tartib'>No.</th>
-              <th className='ism'>Ism</th>
-              <th className="familiya">Familiya</th>
-              <th className="raqam">Telefon raqam</th>
-              <th className="haqida">Markaz haqida</th>
-              <th className="guruh">Fanlar</th>
-              <th className="sinov">Bo'sh vaqt</th>
-              <th className='actions'>Actions</th>
+              <th className='ism'>Guruh nomi</th>
+              <th className="familiya">Fan nomi</th>
+              <th className="raqam">O'qituvchi F.I.SH</th>
+              <th className="haqida">Xona</th>
+              <th className="guruh">Dars kunlari</th>
+              <th className="sinov">Dars vaqti</th>
+              <th className='actions'>Boshqaruv</th>
             </tr>
           </thead>
           <tbody>
@@ -166,33 +159,31 @@ function GroupTable() {
               filteredResults.map((peopleTable, index) => (
                 <Link to={`/adminBody/${peopleTable._id}`}>
                   <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                   
-                   <td>{peopleTable[index+1]}</td>
-                  <td>{peopleTable.name}</td>
-                  <td>{peopleTable.surname}</td>
-                  <td>{peopleTable.phone}</td>
-                  <td>{peopleTable.about}</td>
-                  <td>{peopleTable.subject1}</td>
-                  <td>{peopleTable.free}</td>
-                
-                </tr>
-              </Link>
+                    <td>{peopleTable[index + 1]}</td>
+                    <td>{peopleTable.groupName}</td>
+                    <td>{peopleTable.subName}</td>
+                    <td>{peopleTable.techName}</td>
+                    <td>{peopleTable.classRoom}</td>
+                    <td>{peopleTable.lessDay}</td>
+                    <td>{peopleTable.lessTime}</td>
+                  </tr>
+                </Link>
               ))
             ) : (
               searchValues.category1 === "" ? (
                 records.map((peopleTable, index) => (
                   <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{index+1}</td>  
-                    <td>{peopleTable.name}</td>
-                    <td>{peopleTable.surname}</td>
-                    <td>{peopleTable.phone}</td>
-                    <td>{peopleTable.about}</td>
-                    <td>{peopleTable.subject1}</td>
-                    <td>{peopleTable.free}</td>
+                    <td>{index + 1}</td>
+                    <td>{peopleTable.groupName}</td>
+                    <td>{peopleTable.subName}</td>
+                    <td>{peopleTable.techName}</td>
+                    <td>{peopleTable.classRoom}</td>
+                    <td>{peopleTable.lessDay}</td>
+                    <td>{peopleTable.lessTime}</td>
                     <td className='actions'>
                       <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>
                       <Link to={`/adminBody/${peopleTable._id}`}>
-                      <button  className='visible'><MdVisibility /></button>
+                        <button className='visible'><MdVisibility /></button>
                       </Link>
                     </td>
                   </tr>
