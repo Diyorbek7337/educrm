@@ -24,72 +24,46 @@ const [numberWords, setNumberWords] = useState();
     let word = '';
 
     if (numberWords >= 10000000) {
-      word += tens[Math.floor(numberWords / 10000000)] + ' ';
-      if(numberWords % 10000000 === 0) word += 'million'
-      if(numberWords < 11000000 && numberWords > 99999999 ) {
-        word += tens[Math.floor(numberWords / 10000000)] + ' million ';
-      }
+      word += tens[Math.floor(numberWords / 10000000)] + ' million ';
       numberWords %= 10000000;
   }
 
-
-    if (numberWords >= 1000000) {
+  if (numberWords >= 1000000) {
       word += units[Math.floor(numberWords / 1000000)] + ' million ';
       numberWords %= 1000000;
   }
 
-    if (numberWords >= 100000) {
-      if (numberWords <= 999999) {
-          word += units[Math.floor(numberWords / 100000)] + ' yuz ';
-      } else {
-          word += tens[Math.floor(numberWords / 100000)] + ' ming ';
-      }
-      if(numberWords % 100000 === 0) word += 'ming ';
+  if (numberWords >= 100000) {
+      word += units[Math.floor(numberWords / 100000)] + ' yuz ';
       numberWords %= 100000;
   }
 
-    if (numberWords >= 10000) {
-      if (numberWords <= 99999) {
-          word += tens[Math.floor(numberWords / 10000)] + ' ';
-      } 
-      else {
-        word += units[Math.floor(numberWords / 10000)] + ' ming ';
-    }
-    if(numberWords % 10000 === 0) word += 'ming ';
+  if (numberWords >= 10000) {
+      word += tens[Math.floor(numberWords / 10000)] + ' ming ';
       numberWords %= 10000;
   }
- 
 
-    if (numberWords >= 1000) {
+  if (numberWords >= 1000) {
       word += units[Math.floor(numberWords / 1000)] + ' ming ';
-      if(numberWords % 1000 === 0) word += '';
       numberWords %= 1000;
   }
 
-    // Handle hundreds
-    if (numberWords >= 100) {
-        word += units[Math.floor(numberWords / 100)] + ' yuz ';
-        if(numberWords % 100 === 0) word += '';
-        numberWords %= 100;
-    }
+  if (numberWords >= 100) {
+      word += units[Math.floor(numberWords / 100)] + ' yuz ';
+      numberWords %= 100;
+  }
 
-    // Handle tens and units
-    if (numberWords > 0) {
-        if (numberWords >= 10) {
-            word += tens[Math.floor(numberWords / 10)] + ' ';
-            numberWords %= 10;
-        } else if (numberWords >= 11 && numberWords <= 19) {
-            word += teens[numberWords - 10] + ' ';
-            numberWords = 0; // Skip units for teens
-        }
-        if(numberWords % 10 === 0) word += '';
-        if (numberWords > 0) {
-            word += units[numberWords] + ' ';
-            if(numberWords % 1 === 0) word += ' ';
-        }
-
-    }
-
+  if (numberWords > 0) {
+      if (word !== '') word += 'va ';
+      if (numberWords >= 10 && numberWords <= 19) {
+          word += teens[numberWords - 10];
+          numberWords = 0; // Skip units for teens
+      } else {
+          word += tens[Math.floor(numberWords / 10)];
+          numberWords %= 10;
+          if (numberWords > 0) word += ' ' + units[numberWords];
+      }
+  }
     return word.trim();
 }
 const wordForm = numberToWords(numberWords)
