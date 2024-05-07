@@ -181,7 +181,7 @@ function GroupTable() {
                     <td>{peopleTable.lessDay}</td>
                     <td>{peopleTable.lessTime}</td>
                     <td className='actions'>
-                      <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>
+                      {/* <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button> */}
                       <Link to={`/adminBody/${peopleTable._id}`}>
                         <button className='visible'><MdVisibility /></button>
                       </Link>
