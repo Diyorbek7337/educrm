@@ -13,122 +13,55 @@ function StudentDetails({ id }) {
   const [student, setStudent] = useState(0);
   const { isNightMode } = useTheme();
   const URL = `https://otviz-backend.vercel.app/lids/${id}`;
-  const [loader, setLoader] = useState(true);   
+  const [loader, setLoader] = useState(true);
 
   const [numberWords, setNumberWords] = useState();
-  function numberToWords(numberWords) {
-    const units = ['', 'bir', 'ikki', 'uch', "to'rt", 'besh', 'olti', 'yetti', 'sakkiz', "to'qqiz"];
-    const teens = ['', "o'n bir", "o'n ikki", "o'n uch", "o'n to'rt", "o'n besh", "o'n olti", "o'n yetti", "o'n sakkiz", "o'n to'qqiz"];
-    const tens = ['', "o'n", 'yigirma', "o'ttiz", 'qirq', 'ellik', 'oltmish', 'yetmish', 'sakson', "to'qson"];
 
-    if (numberWords === 0) return 'zero';
 
-    let word = '';
+  const units = ["", "bir", "ikki", "uch", "to'rt", "besh", "olti", "yetti", "sakkiz", "to'qqiz"];
+  const teens = ["o'n", "o'n bir", "o'n ikki", "o'n uch", "o'n to'rt", "o'n besh", "o'n olti", "o'n yetti", "o'n sakkiz", "o'n to'qqiz"];
+  const tens = ["", "", "yigirma", "o'ttiz", "qirq", "ellik", "oltmish", "yetmish", "sakson", "to'qson"];
+  const thousands = ["", "ming", "million", "milliard", "trillion"];
+  function numberToWords(number) {
+    if (number === 0) return "nol";
 
-    if (numberWords >= 10000000) {
+    let words = '';
 
-      word += tens[Math.floor(numberWords / 10000000)] + ' ';
-      if (numberWords % 10000000 === 0) word += 'million'
-      if (numberWords < 11000000 && numberWords > 99999999) {
-        word += tens[Math.floor(numberWords / 10000000)] + ' million ';
+    function getHundreds(n) {
+      let str = '';
+
+      if (n > 99) {
+        str += units[Math.floor(n / 100)] + ' yuz ';
+        n %= 100;
       }
-
-      word += tens[Math.floor(numberWords / 10000000)] + ' million ';
-
-      numberWords %= 10000000;
-    }
-
-  if (numberWords >= 1000000 ) {
-      word += units[Math.floor(numberWords / 1000000)] + ' million ';
-      numberWords %= 1000000;
-    }
-
-
-    if (numberWords >= 100000) {
-      if (numberWords <= 999999) {
-        word += units[Math.floor(numberWords / 100000)] + ' yuz ';
-      } else {
-        word += tens[Math.floor(numberWords / 100000)] + ' ming ';
+      if (n > 19) {
+        str += tens[Math.floor(n / 10)] + ' ';
+        n %= 10;
       }
-      if (numberWords % 100000 === 0) word += 'ming ';
-
-  if (numberWords >= 100000) {
-      word += units[Math.floor(numberWords / 100000)] + ' yuz ';
-
-      numberWords %= 100000;
-    }
-
-
-    if (numberWords >= 10000) {
-      if (numberWords <= 99999) {
-        word += tens[Math.floor(numberWords / 10000)] + ' ';
+      if (n > 9) {
+        str += teens[n - 10] + ' ';
       }
       else {
-        word += units[Math.floor(numberWords / 10000)] + ' ming ';
+        str += units[n] + ' ';
       }
-      if (numberWords % 10000 === 0) word += 'ming ';
-      numberWords %= 10000;
+      return str.trim();
     }
 
+    let thousandCounter = 0;
 
-  if (numberWords >= 10000) {
-      word += tens[Math.floor(numberWords / 10000)] + ' ming ';
-      numberWords %= 10000;
+    while (number > 0) {
+      let chunk = number % 1000;
+      if (chunk) {
+        words = getHundreds(chunk) + ' ' + thousands[thousandCounter] + ' ' + words;
+      }
+      number = Math.floor(number / 1000);
+      thousandCounter++;
+    }
+
+    return words.trim();
   }
 
 
-  if (numberWords >= 1000) {
-      word += units[Math.floor(numberWords / 1000)] + ' ming ';
-
-      if (numberWords % 1000 === 0) word += '';
-
-      numberWords %= 1000;
-    }
-
-
-    // Handle hundreds
-    if (numberWords >= 100) {
-      word += units[Math.floor(numberWords / 100)] + ' yuz ';
-      if (numberWords % 100 === 0) word += '';
-      numberWords %= 100;
-    }
-
-    // Handle tens and units
-    if (numberWords > 0) {
-      if (numberWords >= 10) {
-        word += tens[Math.floor(numberWords / 10)] + ' ';
-        numberWords %= 10;
-      } else if (numberWords >= 11 && numberWords <= 19) {
-        word += teens[numberWords - 10] + ' ';
-        numberWords = 0; // Skip units for teens
-      }
-      if (numberWords % 10 === 0) word += '';
-      if (numberWords > 0) {
-        word += units[numberWords] + ' ';
-        if (numberWords % 1 === 0) word += ' ';
-      }
-
-    }
-
-  if (numberWords >= 100) {
-      word += units[Math.floor(numberWords / 100)] + ' yuz ';
-      numberWords %= 100;
-  }
-  if (numberWords > 0) {
-      if (word !== '') word += 'va ';
-      if (numberWords >= 10 && numberWords <= 19) {
-          word += teens[numberWords - 10];
-          numberWords = 0; // Skip units for teens
-      } else {
-          word += tens[Math.floor(numberWords / 10)];
-          numberWords %= 10;
-          if (numberWords > 0) word += ' ' + units[numberWords];
-      }
-  }
-    return word.trim();
-  }
-  
-}
   const wordForm = numberToWords(numberWords)
 
   useEffect(() => {
@@ -163,7 +96,7 @@ function StudentDetails({ id }) {
     return <div>Loading...</div>;
   }
   console.log(student);
-  
+
 
   return (
     <div className="lidDetailBox">
