@@ -38,7 +38,7 @@ function StudentDetails({ id }) {
       numberWords %= 10000000;
     }
 
-  if (numberWords >= 1000000) {
+  if (numberWords >= 1000000 ) {
       word += units[Math.floor(numberWords / 1000000)] + ' million ';
       numberWords %= 1000000;
     }
