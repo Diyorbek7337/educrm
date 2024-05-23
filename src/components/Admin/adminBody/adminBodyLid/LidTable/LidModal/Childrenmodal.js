@@ -40,11 +40,11 @@ function Childrenmodal() {
                     <div className='formGroup'>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicPhone">
                             <Form.Label>Raqamini kiriting</Form.Label>
-                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Raqamini kiriting" value={addData.phone} required onChange={(e) => handleInputChangeDataLid(e, 'phone')}/>
+                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Raqamini kiriting" value={addData.pNumber} required onChange={(e) => handleInputChangeDataLid(e, 'pNumber')}/>
                         </Form.Group>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicFphone">
                             <Form.Label>Ota-onasini raqamini kiriting</Form.Label>
-                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Ota-Onasini raqamini kiriting" value={addData.fphone} required onChange={(e) => handleInputChangeDataLid(e, 'fphone')}/>
+                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Ota-Onasini raqamini kiriting" value={addData.parentsNumber} required onChange={(e) => handleInputChangeDataLid(e, 'parentsNumber')}/>
                         </Form.Group>
                     </div>
                     <div className='formGroup'>
@@ -54,7 +54,7 @@ function Childrenmodal() {
                         </Form.Group> 
                         <Form.Group className="mb-3 inputForm" controlId="formBasicAge">
                             <Form.Label>Yoshini kiriting</Form.Label>
-                            <Form.Control type="date" placeholder="Yoshini kiriting" value={addData.year} required onChange={(e) => handleInputChangeDataLid(e, 'year')}/>
+                            <Form.Control type="date" placeholder="Yoshini kiriting" value={addData.born} required onChange={(e) => handleInputChangeDataLid(e, 'born')}/>
                         </Form.Group>
                     </div>
                     <div className='formGroup'>
@@ -86,7 +86,7 @@ function Childrenmodal() {
 
                         <div className='formGroupSelect'>
                             <Form.Label>Fan tanlovi</Form.Label>
-                            <Form.Select aria-label="Default select example" required value={addData.subject1} onChange={(e) => handleInputChangeDataLid(e, 'subject1')}>
+                            <Form.Select aria-label="Default select example" required value={addData.sub1} onChange={(e) => handleInputChangeDataLid(e, 'sub1')}>
                                 <option>Fan tanlovi</option>
                                 <option value="Dasturlash (FrontEnd)">Dasturlash (FrontEnd)</option>
                                 <option value="English Kids (Shahnoza)">English Kids (Shahnoza)</option>
@@ -97,7 +97,7 @@ function Childrenmodal() {
                         </div>
                         <div className='formGroupSelect'>
                             <Form.Label>Fan tanlovi (Agar yana bitta fandan o'qimoqchi bo'lsa)</Form.Label>
-                            <Form.Select aria-label="Default select example" required value={addData.subject2} onChange={(e) => handleInputChangeDataLid(e, 'subject2')}>
+                            <Form.Select aria-label="Default select example" required value={addData.sub2} onChange={(e) => handleInputChangeDataLid(e, 'sub2')}>
                                 <option>Fan tanlovi (Ixtiyoriy)</option>
                                 <option value="Dasturlash (FrontEnd)">Dasturlash (FrontEnd)</option>
                                 <option value="English Kids (Shahnoza)">English Kids (Shahnoza)</option>

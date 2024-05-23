@@ -12,7 +12,7 @@ function StudentDetails({ id }) {
   // const { id } = useParams();
   const [student, setStudent] = useState(0);
   const { isNightMode } = useTheme();
-  const URL = `https://otviz-backend.vercel.app/lids/${id}`;
+  const URL = `http://localhost:4000/lids/${id}`;
   const [loader, setLoader] = useState(true);   
 
   const [numberWords, setNumberWords] = useState();
@@ -26,24 +26,20 @@ function StudentDetails({ id }) {
     let word = '';
 
     if (numberWords >= 10000000) {
-<<<<<<< HEAD
       word += tens[Math.floor(numberWords / 10000000)] + ' ';
       if (numberWords % 10000000 === 0) word += 'million'
       if (numberWords < 11000000 && numberWords > 99999999) {
         word += tens[Math.floor(numberWords / 10000000)] + ' million ';
       }
-=======
-      word += tens[Math.floor(numberWords / 10000000)] + ' million ';
->>>>>>> b95aa3a8637f270412e0b454b796a3c9e64d54b8
       numberWords %= 10000000;
     }
 
-  if (numberWords >= 1000000 ) {
+
+    if (numberWords >= 1000000) {
       word += units[Math.floor(numberWords / 1000000)] + ' million ';
       numberWords %= 1000000;
     }
 
-<<<<<<< HEAD
     if (numberWords >= 100000) {
       if (numberWords <= 999999) {
         word += units[Math.floor(numberWords / 100000)] + ' yuz ';
@@ -51,14 +47,9 @@ function StudentDetails({ id }) {
         word += tens[Math.floor(numberWords / 100000)] + ' ming ';
       }
       if (numberWords % 100000 === 0) word += 'ming ';
-=======
-  if (numberWords >= 100000) {
-      word += units[Math.floor(numberWords / 100000)] + ' yuz ';
->>>>>>> b95aa3a8637f270412e0b454b796a3c9e64d54b8
       numberWords %= 100000;
     }
 
-<<<<<<< HEAD
     if (numberWords >= 10000) {
       if (numberWords <= 99999) {
         word += tens[Math.floor(numberWords / 10000)] + ' ';
@@ -70,23 +61,13 @@ function StudentDetails({ id }) {
       numberWords %= 10000;
     }
 
-=======
-  if (numberWords >= 10000) {
-      word += tens[Math.floor(numberWords / 10000)] + ' ming ';
-      numberWords %= 10000;
-  }
->>>>>>> b95aa3a8637f270412e0b454b796a3c9e64d54b8
 
-  if (numberWords >= 1000) {
+    if (numberWords >= 1000) {
       word += units[Math.floor(numberWords / 1000)] + ' ming ';
-<<<<<<< HEAD
       if (numberWords % 1000 === 0) word += '';
-=======
->>>>>>> b95aa3a8637f270412e0b454b796a3c9e64d54b8
       numberWords %= 1000;
     }
 
-<<<<<<< HEAD
     // Handle hundreds
     if (numberWords >= 100) {
       word += units[Math.floor(numberWords / 100)] + ' yuz ';
@@ -110,24 +91,7 @@ function StudentDetails({ id }) {
       }
 
     }
-=======
-  if (numberWords >= 100) {
-      word += units[Math.floor(numberWords / 100)] + ' yuz ';
-      numberWords %= 100;
-  }
->>>>>>> b95aa3a8637f270412e0b454b796a3c9e64d54b8
 
-  if (numberWords > 0) {
-      if (word !== '') word += 'va ';
-      if (numberWords >= 10 && numberWords <= 19) {
-          word += teens[numberWords - 10];
-          numberWords = 0; // Skip units for teens
-      } else {
-          word += tens[Math.floor(numberWords / 10)];
-          numberWords %= 10;
-          if (numberWords > 0) word += ' ' + units[numberWords];
-      }
-  }
     return word.trim();
   }
   const wordForm = numberToWords(numberWords)
@@ -137,7 +101,7 @@ function StudentDetails({ id }) {
     async function getData() {
       try {
         setLoader(true)
-        const response = await fetch(URL);
+        const response = await fetch(URL, { signal: abortController.signal });
 
         if (!response.ok) {
           // throw new Error(response.statusText)

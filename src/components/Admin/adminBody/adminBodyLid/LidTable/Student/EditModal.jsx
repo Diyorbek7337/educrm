@@ -38,7 +38,7 @@ function EditModal({ data }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(initialState),
     };
-    await fetch("http://localhost:4000/lids", requestOptions)
+    await fetch("https://otviz-backend.vercel.app/lids", requestOptions)
      .then((response) => console.log(response))
       .catch((err) => console.log(err));
   }
