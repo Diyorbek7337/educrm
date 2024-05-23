@@ -21,7 +21,6 @@ function Childrenmodal() {
             backdrop="static"
             keyboard={false}
             centered
-
         >
             <Modal.Header closeButton>
                 <Modal.Title>Lidlarni Qo'shish</Modal.Title>

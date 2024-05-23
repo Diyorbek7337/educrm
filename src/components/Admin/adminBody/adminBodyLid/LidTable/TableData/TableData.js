@@ -174,9 +174,9 @@
                      <td>{peopleTable[index+1]}</td>
                     <td>{peopleTable.name}</td>
                     <td>{peopleTable.surname}</td>
-                    <td>{peopleTable.phone}</td>
+                    <td>{peopleTable.pNumber}</td>
                     <td>{peopleTable.about}</td>
-                    <td>{peopleTable.subject1}</td>
+                    <td>{peopleTable.sub1}</td>
                     <td>{peopleTable.free}</td>
                   
                   </tr>
@@ -189,9 +189,9 @@
                       <td>{index+1}</td>  
                       <td>{peopleTable.name}</td>
                       <td>{peopleTable.surname}</td>
-                      <td>{peopleTable.phone}</td>
+                      <td>{peopleTable.pNumber}</td>
                       <td>{peopleTable.about}</td>
-                      <td>{peopleTable.subject1}</td>
+                      <td>{peopleTable.sub1}</td>
                       <td>{peopleTable.free}</td>
                       <td className='actions'>
                         <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>

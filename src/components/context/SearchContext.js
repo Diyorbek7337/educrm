@@ -22,7 +22,7 @@ export const SearchProvider = ({children}) => {
       });
     
       const [PeopleTables, setPeopleTables] = useState([])
-      const URL = "https://nice-shift-goat.cyclic.app/pupils"
+      const URL = "https://otviz-backend.vercel.app/pupils"
     
       useEffect(() => {
         async function getData() {

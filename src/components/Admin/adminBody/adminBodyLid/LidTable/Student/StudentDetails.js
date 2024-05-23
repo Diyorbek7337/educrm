@@ -4,16 +4,18 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaUserEdit } from "react-icons/fa";
 import { useTheme } from "../../../../../context/ThemeContext";
+import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import EditModal from "./EditModal";
 
 function StudentDetails({ id }) {
   // const { id } = useParams();
   const [student, setStudent] = useState(0);
   const { isNightMode } = useTheme();
-  const URL = `https://nice-shift-goat.cyclic.app/pupils/${id}`;
-  const [loader, setLoader] = useState(true);
+  const URL = `https://otviz-backend.vercel.app/lids/${id}`;
+  const [loader, setLoader] = useState(true);   
 
-const [numberWords, setNumberWords] = useState();
+  const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
     const units = ['', 'bir', 'ikki', 'uch', "to'rt", 'besh', 'olti', 'yetti', 'sakkiz', "to'qqiz"];
     const teens = ['', "o'n bir", "o'n ikki", "o'n uch", "o'n to'rt", "o'n besh", "o'n olti", "o'n yetti", "o'n sakkiz", "o'n to'qqiz"];
@@ -25,81 +27,81 @@ const [numberWords, setNumberWords] = useState();
 
     if (numberWords >= 10000000) {
       word += tens[Math.floor(numberWords / 10000000)] + ' ';
-      if(numberWords % 10000000 === 0) word += 'million'
-      if(numberWords < 11000000 && numberWords > 99999999 ) {
+      if (numberWords % 10000000 === 0) word += 'million'
+      if (numberWords < 11000000 && numberWords > 99999999) {
         word += tens[Math.floor(numberWords / 10000000)] + ' million ';
       }
       numberWords %= 10000000;
-  }
+    }
 
 
     if (numberWords >= 1000000) {
       word += units[Math.floor(numberWords / 1000000)] + ' million ';
       numberWords %= 1000000;
-  }
+    }
 
     if (numberWords >= 100000) {
       if (numberWords <= 999999) {
-          word += units[Math.floor(numberWords / 100000)] + ' yuz ';
+        word += units[Math.floor(numberWords / 100000)] + ' yuz ';
       } else {
-          word += tens[Math.floor(numberWords / 100000)] + ' ming ';
+        word += tens[Math.floor(numberWords / 100000)] + ' ming ';
       }
-      if(numberWords % 100000 === 0) word += 'ming ';
+      if (numberWords % 100000 === 0) word += 'ming ';
       numberWords %= 100000;
-  }
+    }
 
     if (numberWords >= 10000) {
       if (numberWords <= 99999) {
-          word += tens[Math.floor(numberWords / 10000)] + ' ';
-      } 
+        word += tens[Math.floor(numberWords / 10000)] + ' ';
+      }
       else {
         word += units[Math.floor(numberWords / 10000)] + ' ming ';
-    }
-    if(numberWords % 10000 === 0) word += 'ming ';
+      }
+      if (numberWords % 10000 === 0) word += 'ming ';
       numberWords %= 10000;
-  }
- 
+    }
+
 
     if (numberWords >= 1000) {
       word += units[Math.floor(numberWords / 1000)] + ' ming ';
-      if(numberWords % 1000 === 0) word += '';
+      if (numberWords % 1000 === 0) word += '';
       numberWords %= 1000;
-  }
+    }
 
     // Handle hundreds
     if (numberWords >= 100) {
-        word += units[Math.floor(numberWords / 100)] + ' yuz ';
-        if(numberWords % 100 === 0) word += '';
-        numberWords %= 100;
+      word += units[Math.floor(numberWords / 100)] + ' yuz ';
+      if (numberWords % 100 === 0) word += '';
+      numberWords %= 100;
     }
 
     // Handle tens and units
     if (numberWords > 0) {
-        if (numberWords >= 10) {
-            word += tens[Math.floor(numberWords / 10)] + ' ';
-            numberWords %= 10;
-        } else if (numberWords >= 11 && numberWords <= 19) {
-            word += teens[numberWords - 10] + ' ';
-            numberWords = 0; // Skip units for teens
-        }
-        if(numberWords % 10 === 0) word += '';
-        if (numberWords > 0) {
-            word += units[numberWords] + ' ';
-            if(numberWords % 1 === 0) word += ' ';
-        }
+      if (numberWords >= 10) {
+        word += tens[Math.floor(numberWords / 10)] + ' ';
+        numberWords %= 10;
+      } else if (numberWords >= 11 && numberWords <= 19) {
+        word += teens[numberWords - 10] + ' ';
+        numberWords = 0; // Skip units for teens
+      }
+      if (numberWords % 10 === 0) word += '';
+      if (numberWords > 0) {
+        word += units[numberWords] + ' ';
+        if (numberWords % 1 === 0) word += ' ';
+      }
 
     }
 
     return word.trim();
-}
-const wordForm = numberToWords(numberWords)
+  }
+  const wordForm = numberToWords(numberWords)
 
   useEffect(() => {
     const abortController = new AbortController();
     async function getData() {
       try {
         setLoader(true)
-        const response = await fetch(URL, { signal: abortController.signal });
+        const response = await fetch(URL);
 
         if (!response.ok) {
           // throw new Error(response.statusText)
@@ -126,6 +128,8 @@ const wordForm = numberToWords(numberWords)
   if (!student) {
     return <div>Loading...</div>;
   }
+  console.log(student);
+  
 
   return (
     <div className="lidDetailBox">
@@ -155,14 +159,14 @@ const wordForm = numberToWords(numberWords)
               <div className="lidDetailBodyLeftBodyItemContent">
                 <div className="lidDetailBodyLeftBodyItemContentItem">
                   <p><span className="lidDetailContentTitle">Yashash Manzili:</span> <span className="lidDetailContentInfo">{student.address}</span>"</p>
-                  <p><span className="lidDetailContentTitle">Tug'ilgan sanasi:</span> <span className="lidDetailContentInfo">{student.year}</span>"</p>
-                  <p><span className="lidDetailContentTitle">Telefon nomeri:</span> <span className="lidDetailContentInfo">{student.phone}</span>"</p>
-                  <p><span className="lidDetailContentTitle">Ota-onasini telefon raqami:</span> <span className="lidDetailContentInfo">{student.fphone}</span>"</p>
-                  <p><span className="lidDetailContentTitle">Tanlagan 1-fani:</span> <span className="lidDetailContentInfo">{student.subject1}</span>"</p>
-                  <p><span className="lidDetailContentTitle">Tanlagan 2-fani:</span> <span className="lidDetailContentInfo">{student.subject2}</span>"</p>
+                  <p><span className="lidDetailContentTitle">Tug'ilgan sanasi:</span> <span className="lidDetailContentInfo">{student.born}</span>"</p>
+                  <p><span className="lidDetailContentTitle">Telefon nomeri:</span> <span className="lidDetailContentInfo">{student.pNumber}</span>"</p>
+                  <p><span className="lidDetailContentTitle">Ota-onasini telefon raqami:</span> <span className="lidDetailContentInfo">{student.parentsNumber}</span>"</p>
+                  <p><span className="lidDetailContentTitle">Tanlagan 1-fani:</span> <span className="lidDetailContentInfo">{student.sub1}</span>"</p>
+                  <p><span className="lidDetailContentTitle">Tanlagan 2-fani:</span> <span className="lidDetailContentInfo">{student.sub2}</span>"</p>
                   <p><span className="lidDetailContentTitle">Bo'sh vaqti:</span> <span className="lidDetailContentInfo">{student.free}</span>"</p>
                   <div className="lidDetailContentInfoEdit">
-                    <button type="button" className="deleteLidDetail editDetail"><FaUserEdit className="editIcon" /> <span>Profilni tahrirlash</span></button>
+                    <button type="button" className="deleteLidDetail editDetail"><FaUserEdit className="editIcon" /> <EditModal data={student} /></button>
                   </div>
                 </div>
               </div>
@@ -208,9 +212,9 @@ const wordForm = numberToWords(numberWords)
                   <div className='formGroupSelect lidDetailForm'>
                     <Form.Label className="lidDetailLabel"><span>*</span> Kurs narxi</Form.Label>
                     <Form.Group controlId="formBasicAddress">
-                            <Form.Control type="text" placeholder="Kurs narxi"  required value={numberWords} onChange={(e) => setNumberWords(e.target.value)}/>
-                            <p className="wordNumber">{wordForm} so'm</p>
-                        </Form.Group> 
+                      <Form.Control type="text" placeholder="Kurs narxi" required value={numberWords} onChange={(e) => setNumberWords(e.target.value)} />
+                      <p className="wordNumber">{wordForm} so'm</p>
+                    </Form.Group>
                   </div>
                 </div>
               </Form>

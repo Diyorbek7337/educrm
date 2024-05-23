@@ -14,7 +14,7 @@ import { useAddDataLid } from "./components/context/AddDataLidsFromModal";
 function App() {
 
 
-  const {PeopleTables} = useAddDataLid()
+  const {PeopleTables} = useAddDataLid();
 
   const pupil = {
     name: "akbar",
@@ -29,7 +29,6 @@ function App() {
     date: "22-22-2222"
   }
   
-
   return (
     <div className="App">
       <Routes>

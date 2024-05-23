@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from "react";
 import { useModal } from "../context/Addmodal"
 
 
-const API_URL = "https://nice-shift-goat.cyclic.app/pupils/post"
+const API_URL = "https://otviz-backend.vercel.app/lids"
 const AddDataLid = createContext();
 
 export const useAddDataLid = () => {
@@ -22,14 +22,14 @@ export const AddDataLidProvider = ({ children }) => {
   const initialState = {
     name: "",
     surname: "",
-    phone: "",
-    fphone: "",
+    pNumber: "",
+    parentsNumber: "",
     address: "",
     about: "",
-    year: 0,
+    born: 0,
     free: "",
-    subject1: "",
-    subject2: "",
+    sub1: "",
+    sub2: "",
   };
 
 
@@ -41,9 +41,7 @@ export const AddDataLidProvider = ({ children }) => {
     setAddData({
       ...addData,
       [types]: value,
-
     });
-
   };
 
   const [PeopleTables, setPeopleTables] = useState([]);
@@ -59,7 +57,7 @@ export const AddDataLidProvider = ({ children }) => {
     setTimeout(() => setShowDelete(false), 3000); // Hide the warning after 5 seconds
   };
 
-  const URL = "https://nice-shift-goat.cyclic.app/pupils";
+  const URL = "https://otviz-backend.vercel.app/lids";
   const [loader, setLoader] = useState(true);
 
 
@@ -68,7 +66,7 @@ export const AddDataLidProvider = ({ children }) => {
     async function getData() {
       try {
         setLoader(true)
-        const response = await fetch(URL, { signal: abortController.signal });
+        const response = await fetch(URL);
 
         if (!response.ok) {
           // throw new Error(response.statusText)
@@ -76,7 +74,7 @@ export const AddDataLidProvider = ({ children }) => {
         }
         const data = await response.json();
         setPeopleTables(data)
-        console.log(data)
+        console.log(data, "jlhfvkycfycyhfcfcgyc")
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -96,6 +94,7 @@ export const AddDataLidProvider = ({ children }) => {
 
 
   async function setdata(e) {
+    console.log(addData);
     e.preventDefault(); // Prevent default form submission
     const abortController = new AbortController();
     try {
@@ -127,7 +126,7 @@ export const AddDataLidProvider = ({ children }) => {
 
   async function deleteData(id) {
     const abortController = new AbortController();
-    await fetch(`https://nice-shift-goat.cyclic.app/pupils/delete/${id}`, {
+    await fetch(`https://shy-plum-alligator-yoke.cyclic.app/lids/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.text()) // or res.json()
