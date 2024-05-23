@@ -127,6 +127,8 @@ function StudentDetails({ id }) {
   }
     return word.trim();
   }
+  
+}
   const wordForm = numberToWords(numberWords)
 
   useEffect(() => {
@@ -157,7 +159,6 @@ function StudentDetails({ id }) {
     };
 
   }, [id]);
-
   if (!student) {
     return <div>Loading...</div>;
   }
@@ -261,7 +262,6 @@ function StudentDetails({ id }) {
       </div>
     </div>
   );
-}
 }
 
 export default StudentDetails;
