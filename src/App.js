@@ -6,8 +6,6 @@ import AdminBody from "./components/Admin/adminBody/AdminBody";
 import Pupil from "./components/Admin/adminBody/adminBodyLid/pupilTable/Pupil";
 import GroupTable from "./components/Admin/adminBody/adminBodyLid/groupTable/GroupTable";
 import Login from "./components/login/Login";
-import Childrenmodal from "./components/Admin/adminBody/adminBodyLid/LidTable/LidModal/Childrenmodal";
-import TableData from "./components/Admin/adminBody/adminBodyLid/LidTable/TableData/TableData";
 import StudentDetails from "./components/Admin/adminBody/adminBodyLid/LidTable/Student/StudentDetails";
 import { useAddDataLid } from "./components/context/AddDataLidsFromModal";
 
