@@ -9,10 +9,12 @@
     color: #9ca3af;
     text-decoration: none;
 }
+
 .searchLid {
     color: white;
     width: 100%;
 }
+
 .lidTableHeader {
     padding: 10px 15px 10px 20px;
     background-color: var(--light-header-color);
@@ -21,9 +23,10 @@
     justify-content: space-between;
     border-bottom: 1px solid var(--light-border-color);
 }
+
 .lidTableHeader.dark {
     background-color: #111827;
-    border-bottom-color: var(--light-border-color) ;
+    border-bottom-color: var(--light-border-color);
 }
 
 .lidHeaderSecond.dark {
@@ -33,9 +36,11 @@
 .titleLists.dark {
     color: var(--light-mode);
 }
+
 .breadcrumb {
     margin: 0 !important;
 }
+
 .addLid {
     padding: 7px 20px;
     background-color: rgb(56, 194, 10);
@@ -43,24 +48,30 @@
     border-radius: 8px;
     display: inline-block;
 }
+
 .addLid.dark {
     background-color: rgb(2, 136, 60);
 }
+
 .addLid:hover {
     color: black;
 }
+
 .page-link.dark {
-    background-color: rgba(48, 48, 48, 0.414) ;
+    background-color: rgba(48, 48, 48, 0.414);
     color: #fff;
 }
+
 .pagination .active {
     background-color: #4F46E5 !important;
     border: 1px solid #4F46E5;
 }
+
 .pagination:focus {
     border-color: #4F46E5 !important;
     box-shadow: 0 0 0 0.25rem #4F46E5 !important
 }
+
 .active>.page-link {
     border-color: #4F46E5 !important;
 }
@@ -73,25 +84,30 @@
     background-color: rgb#2a3338 !important;
     color: rgb(209 213 219);
 }
+
 .searchRow.dark {
     background-color: #111827;
     color: rgb(209 213 219);
 }
+
 .searchRow.dark input::placeholder {
     color: rgb(209 213 219);
 }
 
-.searchRow{
+.searchRow {
     background-color: #ddddddb9;
 }
+
 .recordsMap:nth-child(2n-1) {
     background-color: #ddddddb9;
-    
-  }
+
+}
+
 .recordsMap.dark {
     background-color: #2a3338 !important;
     color: rgb(209 213 219);
 }
+
 .recordsMap:nth-child(2n-1).dark {
     background-color: #111827 !important;
 }
@@ -100,30 +116,37 @@
     background-color: #3282b8 !important;
     color: white !important;
 }
+
 .recordsMap:hover {
     background-color: #0aafdd;
     color: white;
 }
+
 .redFill {
     color: red !important;
     /* background-color: white; */
 }
 
-th, td {
+th,
+td {
     text-align: center !important;
     box-sizing: border-box;
     padding: 8px;
     border: 1px solid rgb(120, 122, 124);
 }
+
 td {
     cursor: pointer;
 }
+
 .tartib {
     width: 50px;
 }
+
 tbody {
     overflow-x: auto;
 }
+
 td input {
     border: none;
     background-color: transparent;
@@ -135,27 +158,34 @@ td input {
     /* border: none !important; */
     border: 1px solid black;
 }
+
 .searchRow td {
     border: 1px solid black;
 }
+
 .user {
     background-color: transparent;
 }
+
 .hidden {
     display: none;
 }
+
 .lidHeaderSecond {
-    padding: 20px 20px !important; 
+    padding: 20px 20px !important;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .lidHeaderSecond ul {
     margin: 0;
 }
+
 .lidHeaderSecond h2 {
     margin: 0;
 }
+
 .visible {
     display: block;
     color: #3282b8;
@@ -164,7 +194,9 @@ td input {
     border-radius: 5px;
     border: none;
 }
+
 .actions {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
