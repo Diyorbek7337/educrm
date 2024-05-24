@@ -4,8 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ReactInputMask from 'react-input-mask';
 
-function EditModal(data) {
-  console.log(data);
+function EditModal({data}) {
+  // console.log(data);
 
   const initialState = {
     name: data.name,
@@ -22,20 +22,25 @@ function EditModal(data) {
 
   const [addData, setAddData] = useState(initialState);
 
-  const handleInputChangeDataLid = (e, types) => {
-    const { names, value } = e.target;
-    setAddData({
-      ...addData,
-      [types]: value,
-    });
+  useEffect(() => {
+    setAddData(initialState);
+  }, [data]);
+
+  const handleInputChangeDataLid = (e, key) => {
+    const { value } = e.target;
+    setAddData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
   };
 
   
-  async function adddd() {
+  async function adddd(e) {
+    e.preventDefault();
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(initialState),
+      body: JSON.stringify(addData),
     };
     await fetch("https://otviz-backend.vercel.app/lids", requestOptions)
      .then((response) => console.log(response))
