@@ -1,47 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ReactInputMask from 'react-input-mask';
 
 function EditModal({ data }) {
-  const [modalShow, setModalShow] = React.useState(false);
-  console.log(data);
+  const [modalShow, setModalShow] = useState(false);
 
   const initialState = {
     name: data.name,
     surname: data.surname,
-    pNumber: data.pNumber,
-    parentsNumber: data.parentsNumber,
+    phone: data.pNumber,
+    fphone: data.parentsNumber,
     address: data.address,
     about: "",
-    born: data.born,
+    year: data.born,
     free: data.free,
-    sub1: data.sub1,
-    sub2: data.sub2,
+    subject1: data.sub1,
+    subject2: data.sub2,
   };
 
   const [addData, setAddData] = useState(initialState);
 
   const handleInputChangeDataLid = (e, types) => {
-    const { names, value } = e.target;
+    const { value } = e.target;
     setAddData({
       ...addData,
       [types]: value,
     });
   };
 
-  
-  async function adddd() {
+  const adddd = async (e) => {
+    e.preventDefault();
     const requestOptions = {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(initialState),
+      body: JSON.stringify(addData),
     };
     await fetch("http://localhost:4000/lids", requestOptions)
-     .then((response) => console.log(response))
+      .then((response) => console.log(response))
       .catch((err) => console.log(err));
-  }
+  };
+
   function MyVerticallyCenteredModal(props) {
     return (
       <Modal
@@ -53,7 +53,7 @@ function EditModal({ data }) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+            Profilni tahrirlang
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -149,7 +149,7 @@ function EditModal({ data }) {
                   onChange={(e) => handleInputChangeDataLid(e, "about")}
                 >
                   <option>O'quv markaz haqida qayerdan eshitdingiz?</option>
-                  <option value="Instagram">Intagram</option>
+                  <option value="Instagram">Instagram</option>
                   <option value="Telegram">Telegram</option>
                   <option value="Banner">Bannerlar</option>
                   <option value="Tanishlar">Tanishlar</option>
@@ -236,13 +236,13 @@ function EditModal({ data }) {
       </Modal>
     );
   }
-    return (
-        <div>
-          <span variant="primary" onClick={() => setModalShow(true)}>
-            Profilni ahrirlash
-          </span>
-    
-          <MyVerticallyCenteredModal
+
+  return (
+    <div>
+      <span variant="primary" onClick={() => setModalShow(true)}>
+        Profilni tahrirlash
+      </span>
+      <MyVerticallyCenteredModal
             show={modalShow}
             onHide={() => setModalShow(false)}
           />
