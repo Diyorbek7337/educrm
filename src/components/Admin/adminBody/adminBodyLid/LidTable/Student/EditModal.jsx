@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, memo } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ReactInputMask from 'react-input-mask';
 
-function EditModal({ data }) {
-  const [modalShow, setModalShow] = React.useState(false);
+function EditModal(data) {
   console.log(data);
 
   const initialState = {
@@ -236,18 +235,19 @@ function EditModal({ data }) {
       </Modal>
     );
   }
-    return (
-        <div>
-          <span variant="primary" onClick={() => setModalShow(true)}>
-            Profilni ahrirlash
-          </span>
-    
-          <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        </div>
-      );
+    const [modalShow, setModalShow] = React.useState(false);
+  return (
+    <div>
+    <span variant="primary" onClick={() => setModalShow(true)}>
+      Profilni ahrirlash
+    </span>
+
+    <MyVerticallyCenteredModal
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+    />
+  </div>
+  )
 }
 
-export default EditModal;
+export default memo(EditModal);

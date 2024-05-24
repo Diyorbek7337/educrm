@@ -69,7 +69,6 @@ export const AddDataLidProvider = ({ children }) => {
         const response = await fetch(URL);
 
         if (!response.ok) {
-          // throw new Error(response.statusText)
           throw new Error(response.statusText)
         }
         const data = await response.json();
@@ -126,7 +125,7 @@ export const AddDataLidProvider = ({ children }) => {
 
   async function deleteData(id) {
     const abortController = new AbortController();
-    await fetch(`https://shy-plum-alligator-yoke.cyclic.app/lids/${id}`, {
+    await fetch(`https://otviz-backend.vercel.app/lids/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.text()) // or res.json()

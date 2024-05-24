@@ -12,8 +12,9 @@ function StudentDetails({ id }) {
   // const { id } = useParams();
   const [student, setStudent] = useState(0);
   const { isNightMode } = useTheme();
-  const URL = `http://localhost:4000/lids/${id}`;
-  const [loader, setLoader] = useState(true);   
+  const URL = `https://otviz-backend.vercel.app/lids/${id}`;
+  const [loader, setLoader] = useState(true);
+
 
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
@@ -101,7 +102,7 @@ function StudentDetails({ id }) {
     async function getData() {
       try {
         setLoader(true)
-        const response = await fetch(URL, { signal: abortController.signal });
+        const response = await fetch(URL);
 
         if (!response.ok) {
           // throw new Error(response.statusText)
@@ -129,7 +130,7 @@ function StudentDetails({ id }) {
     return <div>Loading...</div>;
   }
   console.log(student);
-  
+
 
   return (
     <div className="lidDetailBox">
@@ -166,7 +167,9 @@ function StudentDetails({ id }) {
                   <p><span className="lidDetailContentTitle">Tanlagan 2-fani:</span> <span className="lidDetailContentInfo">{student.sub2}</span>"</p>
                   <p><span className="lidDetailContentTitle">Bo'sh vaqti:</span> <span className="lidDetailContentInfo">{student.free}</span>"</p>
                   <div className="lidDetailContentInfoEdit">
-                    <button type="button" className="deleteLidDetail editDetail"><FaUserEdit className="editIcon" /> <EditModal data={student} /></button>
+                    <button type="button" className="deleteLidDetail editDetail"><FaUserEdit className="editIcon" />
+                      <EditModal data={student} />
+                    </button>
                   </div>
                 </div>
               </div>
