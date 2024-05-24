@@ -182,7 +182,7 @@
                   </tr>
                 </Link>
                 ))
-              ) : (
+              ) :    (
                 searchValues.category1 === "" ? (
                   records.map((peopleTable, index) => (
                     <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>

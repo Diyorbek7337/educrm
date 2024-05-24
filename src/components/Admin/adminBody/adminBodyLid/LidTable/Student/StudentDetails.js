@@ -10,7 +10,7 @@ import EditModal from "./EditModal";
 
 function StudentDetails({ id }) {
   // const { id } = useParams();
-  const [student, setStudent] = useState(0);
+  const [student, setStudent] = useState();
   const { isNightMode } = useTheme();
   const URL = `https://otviz-backend.vercel.app/lids/${id}`;
   const [loader, setLoader] = useState(true);
