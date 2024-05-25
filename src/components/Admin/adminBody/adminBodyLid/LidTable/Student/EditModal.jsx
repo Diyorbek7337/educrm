@@ -1,54 +1,29 @@
-import React, { useEffect, useState, memo } from "react";
+import React, { memo } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ReactInputMask from 'react-input-mask';
+import useEdit from "./useEdit";
+import { FaUserEdit } from "react-icons/fa";
 
 function EditModal(data) {
-  console.log(data);
 
-  const initialState = {
-    name: data.name,
-    surname: data.surname,
-    pNumber: data.pNumber,
-    parentsNumber: data.parentsNumber,
-    address: data.address,
-    about: "",
-    born: data.born,
-    free: data.free,
-    sub1: data.sub1,
-    sub2: data.sub2,
-  };
+  const { handleInputChangeDataLid, addLid, addData } = useEdit(data);
 
-  const [addData, setAddData] = useState(initialState);
-
-  const handleInputChangeDataLid = (e, types) => {
-    const { names, value } = e.target;
-    setAddData({
-      ...addData,
-      [types]: value,
-    });
-  };
-
-  
-  async function adddd() {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(initialState),
-    };
-    await fetch("https://otviz-backend.vercel.app/lids", requestOptions)
-     .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  }
-  function MyVerticallyCenteredModal(props) {
-    return (
+  const [modalShow, setModalShow] = React.useState(false);
+  const handleClose = () => setModalShow(false);
+  return (
+    <div>
+        <button type="button" className="deleteLidDetail editDetail" variant="primary" onClick={() => setModalShow(true)}>
+         <FaUserEdit /> Profilni tahrirlash
+        </button>
+      
       <Modal
-        {...props}
+        show={modalShow}
         size="xl"
         backdrop="static"
-        aria-labelledby="contained-modal-title-vcenter"
         centered
+        onHide={handleClose}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -56,7 +31,7 @@ function EditModal(data) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={adddd}>
+          <Form onSubmit={addLid}>
             <div className="formGroup">
               <Form.Group className="mb-3 inputForm" controlId="formBasicName">
                 <Form.Label>Ismini kiriting</Form.Label>
@@ -229,24 +204,8 @@ function EditModal(data) {
             </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
-    );
-  }
-    const [modalShow, setModalShow] = React.useState(false);
-  return (
-    <div>
-    <span variant="primary" onClick={() => setModalShow(true)}>
-      Profilni ahrirlash
-    </span>
-
-    <MyVerticallyCenteredModal
-      show={modalShow}
-      onHide={() => setModalShow(false)}
-    />
-  </div>
+    </div>
   )
 }
 

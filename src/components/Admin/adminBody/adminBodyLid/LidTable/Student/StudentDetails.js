@@ -2,7 +2,6 @@
 import "./student.css"
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaUserEdit } from "react-icons/fa";
 import { useTheme } from "../../../../../context/ThemeContext";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -110,7 +109,6 @@ function StudentDetails({ id }) {
         }
         const data = await response.json();
         setStudent(data)
-        console.log(data)
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -129,7 +127,6 @@ function StudentDetails({ id }) {
   if (!student) {
     return <div>Loading...</div>;
   }
-  console.log(student);
 
 
   return (
@@ -167,9 +164,9 @@ function StudentDetails({ id }) {
                   <p><span className="lidDetailContentTitle">Tanlagan 2-fani:</span> <span className="lidDetailContentInfo">{student.sub2}</span>"</p>
                   <p><span className="lidDetailContentTitle">Bo'sh vaqti:</span> <span className="lidDetailContentInfo">{student.free}</span>"</p>
                   <div className="lidDetailContentInfoEdit">
-                    <button type="button" className="deleteLidDetail editDetail"><FaUserEdit className="editIcon" />
-                      <EditModal data={student} />
-                    </button>
+                  <div>
+                  <EditModal data={student} />
+                  </div>
                   </div>
                 </div>
               </div>

@@ -73,7 +73,7 @@ export const AddDataLidProvider = ({ children }) => {
         }
         const data = await response.json();
         setPeopleTables(data)
-        console.log(data, "jlhfvkycfycyhfcfcgyc")
+        console.log("getData", data)
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
