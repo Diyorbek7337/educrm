@@ -65,7 +65,7 @@ function EditModal(data) {
                   mask="+\9\9\8 (99) 999-99-99"
                   type="text"
                   placeholder="Raqamini kiriting"
-                  value={addData.phone}
+                  value={addData.pNumber}
                   required
                   onChange={(e) => handleInputChangeDataLid(e, "phone")}
                 />
@@ -80,7 +80,7 @@ function EditModal(data) {
                   mask="+\9\9\8 (99) 999-99-99"
                   type="text"
                   placeholder="Ota-Onasini raqamini kiriting"
-                  value={addData.fphone}
+                  value={addData.parentsNumber}
                   required
                   onChange={(e) => handleInputChangeDataLid(e, "fphone")}
                 />
@@ -105,7 +105,7 @@ function EditModal(data) {
                 <Form.Control
                   type="date"
                   placeholder="Yoshini kiriting"
-                  value={addData.year}
+                  value={addData.born}
                   required
                   onChange={(e) => handleInputChangeDataLid(e, "year")}
                 />
@@ -153,7 +153,7 @@ function EditModal(data) {
                 <Form.Select
                   aria-label="Default select example"
                   required
-                  value={addData.subject1}
+                  value={addData.sub1}
                   onChange={(e) => handleInputChangeDataLid(e, "subject1")}
                 >
                   <option>Fan tanlovi</option>
@@ -179,7 +179,7 @@ function EditModal(data) {
                 <Form.Select
                   aria-label="Default select example"
                   required
-                  value={addData.subject2}
+                  value={addData.sub2}
                   onChange={(e) => handleInputChangeDataLid(e, "subject2")}
                 >
                   <option>Fan tanlovi (Ixtiyoriy)</option>
