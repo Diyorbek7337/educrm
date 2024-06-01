@@ -1,19 +1,21 @@
 // StudentDetails.js
 import "./student.css"
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTheme } from "../../../../../context/ThemeContext";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import EditModal from "./EditModal";
+import Overlay from 'react-bootstrap/Overlay';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 function StudentDetails({ id }) {
-  // const { id } = useParams();
   const [student, setStudent] = useState();
   const { isNightMode } = useTheme();
   const URL = `https://otviz-backend.vercel.app/lids/${id}`;
   const [loader, setLoader] = useState(true);
-
+  const [showToolTip, setShowToolTip] = useState(false);
+  const target = useRef(null);
 
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
@@ -128,6 +130,7 @@ function StudentDetails({ id }) {
     return <div>Loading...</div>;
   }
 
+ 
 
   return (
     <div className="lidDetailBox">
@@ -164,9 +167,9 @@ function StudentDetails({ id }) {
                   <p><span className="lidDetailContentTitle">Tanlagan 2-fani:</span> <span className="lidDetailContentInfo">{student.sub2}</span>"</p>
                   <p><span className="lidDetailContentTitle">Bo'sh vaqti:</span> <span className="lidDetailContentInfo">{student.free}</span>"</p>
                   <div className="lidDetailContentInfoEdit">
-                  <div>
-                  <EditModal data={student} />
-                  </div>
+                    <div>
+                      <EditModal data={student} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,13 +219,63 @@ function StudentDetails({ id }) {
                       <p className="wordNumber">{wordForm} so'm</p>
                     </Form.Group>
                   </div>
+                  <div className='formGroupSelect lidDetailForm'>
+                    <Form.Label className="lidDetailLabel"><span>*</span> Guruh nomi</Form.Label>
+                    <Form.Select aria-label="Default select example" required >
+                      <option className="lidDetailSelectTitle">Tanlash</option>
+                      <option value="guruh1">1-guruh</option>
+                      <option value="guruh2">2-guruh</option>
+                      <option value="guruh3">3-guruh</option>
+                      <option value="guruh4">4-guruh</option>
+                    </Form.Select>
+                  </div>
+
                 </div>
               </Form>
 
             </div>
           </div>
           <div className="lidDetailRightBottom">
-
+            <div className="lidDetailRightTopTitle">
+              <p className="lidDetailBodyLeftBodyItemTitle aboutCourse">Davomat</p>
+            </div>
+            <div className="lidDetailRightBottomContent">
+              <Form>
+                <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
+                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom'>
+                    <Form.Label className="lidDetailLabel"><span>*</span> Jadval turi</Form.Label>
+                    <Form.Select aria-label="Default select example" required >
+                      <option className="lidDetailSelectTitle">Tanlash</option>
+                      <option value="boshlamagan">Haftaning toq kunlari</option>
+                      <option value="oqimoqda">Haftaning juft kunlari</option>
+                      <option value="yakunlagan">Hafta kunlarini tanlash</option>
+                    </Form.Select>
+                  </div>
+                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
+                    <Form.Label className="lidDetailLabel"><span>*</span> Bir haftadagi darslar soni</Form.Label>
+                    <div className="formRadioGroup">
+                      <div className="formRadioItem">
+                        <Form.Check type="radio" id="radio1" aria-label="radio 1" name="radio" />
+                        <Form.Label for="radio1" className="radioLabel lidDetailLabel">1 marta</Form.Label>
+                      </div>
+                      <div className="formRadioItem">
+                        <Form.Check id="radio2" type="radio" aria-label="radio 1" name="radio" />
+                        <Form.Label for="radio2" className="radioLabel lidDetailLabel">2 marta</Form.Label>
+                      </div>
+                      <div className="formRadioItem">
+                        <Form.Check id="radio3" type="radio" aria-label="radio 1" name="radio" />
+                        <Form.Label for="radio3" className="radioLabel lidDetailLabel">3 marta</Form.Label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom'>
+                    <Form.Label className="lidDetailLabel"><span>*</span> Hafta kunlari</Form.Label>
+                    <span className="btnHafta" onClick={() => setShowToolTip(!showToolTip)}>Hafta kunlarini tanlang</span>
+                    
+                  </div>
+                </div>
+              </Form>
+            </div>
           </div>
         </div>
       </div>
