@@ -87,6 +87,10 @@ function StudentDetails({ id }) {
     }
   }, [weeklyClasses]);
 
+
+
+  
+
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
     const units = ['', 'bir', 'ikki', 'uch', "to'rt", 'besh', 'olti', 'yetti', 'sakkiz', "to'qqiz"];
@@ -325,12 +329,45 @@ function StudentDetails({ id }) {
                   <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
                     <Form.Label className="lidDetailLabel"><span>*</span> Bir haftadagi darslar soni</Form.Label>
                     <div className="formRadioGroup">
-                      <Form.Control
-                        type="number"
-                        value={weeklyClasses}
-                        onChange={handleWeeklyClassesChange}
-                        disabled={disableWeeklyClasses}
-                      />
+                      <div className="formRadioItem">
+                        <Form.Check
+                          type="radio"
+                          id="radio3"
+                          aria-label="radio 3"
+                          name="radio"
+                          value={3}
+                          checked={weeklyClasses === 3}
+                          onChange={handleWeeklyClassesChange}
+                          disabled={disableWeeklyClasses}
+                        />
+                        <Form.Label htmlFor="radio3" className="radioLabel lidDetailLabel">3 marta</Form.Label>
+                      </div>
+                      <div className="formRadioItem">
+                        <Form.Check
+                          id="radio4"
+                          type="radio"
+                          aria-label="radio 4"
+                          name="radio"
+                          value={4}
+                          checked={weeklyClasses === 4}
+                          onChange={handleWeeklyClassesChange}
+                          disabled={disableWeeklyClasses}
+                        />
+                        <Form.Label htmlFor="radio4" className="radioLabel lidDetailLabel">4 marta</Form.Label>
+                      </div>
+                      <div className="formRadioItem">
+                        <Form.Check
+                          id="radio5"
+                          type="radio"
+                          aria-label="radio 5"
+                          name="radio"
+                          value={5}
+                          checked={weeklyClasses === 5}
+                          onChange={handleWeeklyClassesChange}
+                          disabled={disableWeeklyClasses}
+                        />
+                        <Form.Label htmlFor="radio5" className="radioLabel lidDetailLabel">5 marta</Form.Label>
+                      </div>
                     </div>
                   </div>
                   <div className='formGroupSelect lidDetailForm lidDetailFormBottom lidDetailWeekDays'>
@@ -361,13 +398,13 @@ function StudentDetails({ id }) {
                 <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
                   <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
                     <Form.Label className="lidDetailLabel"><span>*</span> O'qishni boshlagan sanasi</Form.Label>
-                    <Form.Control type="date" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime"/>
+                    <Form.Control type="date" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
                   </div>
                   <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
                     <Form.Label className="lidDetailLabel"><span>*</span> O'qishni boshlagan sanasi</Form.Label>
                     <div className="formDetailTime">
-                    <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime"/>
-                    <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime"/>
+                      <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
+                      <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
                     </div>
                   </div>
 
