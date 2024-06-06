@@ -1,21 +1,91 @@
 // StudentDetails.js
 import "./student.css"
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from "../../../../../context/ThemeContext";
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import EditModal from "./EditModal";
-import Overlay from 'react-bootstrap/Overlay';
-import Tooltip from 'react-bootstrap/Tooltip';
+
 
 function StudentDetails({ id }) {
   const [student, setStudent] = useState();
+  const [visible, setVisible] = useState(false);
   const { isNightMode } = useTheme();
   const URL = `https://otviz-backend.vercel.app/lids/${id}`;
   const [loader, setLoader] = useState(true);
-  const [showToolTip, setShowToolTip] = useState(false);
-  const target = useRef(null);
+
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [scheduleType, setScheduleType] = useState("");
+  const [weeklyClasses, setWeeklyClasses] = useState('');
+  const [disableWeeklyClasses, setDisableWeeklyClasses] = useState(false);
+
+
+  const dayAbbreviations = {
+    Dushanba: 'Dush',
+    Seshanba: 'Sesh',
+    Chorshanba: 'Chor',
+    Payshanba: 'Pay',
+    Juma: 'Jum',
+    Shanba: 'Shan'
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      if (selectedDays.length < weeklyClasses) {
+        setSelectedDays((prevSelectedDays) => [...prevSelectedDays, name]);
+      } else {
+        alert('Tanlangan kunlar soni haftadagi darslar sonidan oshmasligi kerak.');
+      }
+    } else {
+      setSelectedDays((prevSelectedDays) => prevSelectedDays.filter((day) => day !== name));
+    }
+  };
+
+  const removeDay = (day) => {
+    setSelectedDays((prevSelectedDays) => prevSelectedDays.filter(selectedDay => selectedDay !== day));
+    const dayName = Object.keys(dayAbbreviations).find(key => dayAbbreviations[key] === day);
+    if (dayName) {
+      document.getElementById(dayName.toLowerCase()).checked = false;
+    }
+  };
+
+
+  const handleScheduleTypeChange = (event) => {
+    const { value } = event.target;
+    setScheduleType(value);
+
+    if (value === "toq") {
+      setSelectedDays(["Dush", "Chor", "Jum"]);
+    } else if (value === "juft") {
+      setSelectedDays(["Sesh", "Pay", "Shan"]);
+    } else {
+      setSelectedDays([]);
+    }
+  };
+
+  useEffect(() => {
+    if (scheduleType === 'toq' || scheduleType === 'juft') {
+      setDisableWeeklyClasses(true);
+    } else {
+      setDisableWeeklyClasses(false);
+    }
+  }, [scheduleType]);
+
+  const handleWeeklyClassesChange = (event) => {
+    const { value } = event.target;
+    if (parseInt(value) > 0 && parseInt(value) < 7) { // Qiymat 0 dan katta bo'lishini tekshiramiz
+      setWeeklyClasses(parseInt(value));
+    }
+
+  };
+
+
+
+  useEffect(() => {
+    if (scheduleType === 'boshqa') {
+      setSelectedDays([]);
+    }
+  }, [weeklyClasses]);
 
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
@@ -130,7 +200,7 @@ function StudentDetails({ id }) {
     return <div>Loading...</div>;
   }
 
- 
+
 
   return (
     <div className="lidDetailBox">
@@ -242,37 +312,65 @@ function StudentDetails({ id }) {
             <div className="lidDetailRightBottomContent">
               <Form>
                 <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
-                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom'>
+                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom' controlId="scheduleType">
                     <Form.Label className="lidDetailLabel"><span>*</span> Jadval turi</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
-                      <option className="lidDetailSelectTitle">Tanlash</option>
-                      <option value="boshlamagan">Haftaning toq kunlari</option>
-                      <option value="oqimoqda">Haftaning juft kunlari</option>
-                      <option value="yakunlagan">Hafta kunlarini tanlash</option>
-                    </Form.Select>
+                    <Form.Control as="select" value={scheduleType} onChange={handleScheduleTypeChange}>
+
+                      <option value="" className="lidDetailSelectTitle">Tanlash</option>
+                      <option value="toq">Haftaning toq kunlari</option>
+                      <option value="juft">Haftaning juft kunlari</option>
+                      <option value="boshqa">Hafta kunlarini tanlash</option>
+                    </Form.Control>
                   </div>
                   <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
                     <Form.Label className="lidDetailLabel"><span>*</span> Bir haftadagi darslar soni</Form.Label>
                     <div className="formRadioGroup">
-                      <div className="formRadioItem">
-                        <Form.Check type="radio" id="radio1" aria-label="radio 1" name="radio" />
-                        <Form.Label for="radio1" className="radioLabel lidDetailLabel">1 marta</Form.Label>
-                      </div>
-                      <div className="formRadioItem">
-                        <Form.Check id="radio2" type="radio" aria-label="radio 1" name="radio" />
-                        <Form.Label for="radio2" className="radioLabel lidDetailLabel">2 marta</Form.Label>
-                      </div>
-                      <div className="formRadioItem">
-                        <Form.Check id="radio3" type="radio" aria-label="radio 1" name="radio" />
-                        <Form.Label for="radio3" className="radioLabel lidDetailLabel">3 marta</Form.Label>
-                      </div>
+                      <Form.Control
+                        type="number"
+                        value={weeklyClasses}
+                        onChange={handleWeeklyClassesChange}
+                        disabled={disableWeeklyClasses}
+                      />
                     </div>
                   </div>
-                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom'>
+                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom lidDetailWeekDays'>
                     <Form.Label className="lidDetailLabel"><span>*</span> Hafta kunlari</Form.Label>
-                    <span className="btnHafta" onClick={() => setShowToolTip(!showToolTip)}>Hafta kunlarini tanlang</span>
-                    
+                    <div className="formCheckButton">
+                      <button className="formCheckButtonItem" type="button" onClick={() => setVisible(!visible)} disabled={disableWeeklyClasses}>
+                        {selectedDays.length === 0 ? 'Tanlash' :
+                          selectedDays.map((day, index) => (
+                            <span key={index} className="formCheckButtonItemSelected">
+                              <span>{day}</span> <button className="formCheckButtonItemCancel" type="button" onClick={() => removeDay(day)}>x</button>
+                            </span>
+                          ))
+                        }
+                      </button>
+                    </div>
+                    <div className={visible ? 'formCheckGroup visible' : 'formCheckGroup'}>
+                      {Object.keys(dayAbbreviations).map((dayName, index) => (
+                        <div className="formCheckItem" key={index}>
+                          <Form.Check type="checkbox" id={dayName.toLowerCase()} name={dayName} onChange={handleCheckboxChange} />
+                          <Form.Label htmlFor={dayName.toLowerCase()} className="checkboxLabel lidDetailLabel">{dayName}</Form.Label>
+                        </div>
+                      ))}
+                    </div>
+
                   </div>
+
+                </div>
+                <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
+                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
+                    <Form.Label className="lidDetailLabel"><span>*</span> O'qishni boshlagan sanasi</Form.Label>
+                    <Form.Control type="date" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime"/>
+                  </div>
+                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
+                    <Form.Label className="lidDetailLabel"><span>*</span> O'qishni boshlagan sanasi</Form.Label>
+                    <div className="formDetailTime">
+                    <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime"/>
+                    <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime"/>
+                    </div>
+                  </div>
+
                 </div>
               </Form>
             </div>
