@@ -1,4 +1,4 @@
-import React, {createContext, useState, useContext} from "react";
+import React, {createContext, useState, useContext, useEffect} from "react";
 import Student from "../json files/student.json";
 
 
@@ -6,18 +6,17 @@ const SearchPupilContext = createContext();
 
 
 export const useSearchPupil = () => {
-    return useContext(SearchPupilContext)
+  return useContext(SearchPupilContext)
 }
-
-
 export const SearchPupilProvider = ({children}) => {
+   
     const [searchValues, setSearchValues] = useState({
         category1: '',
         category2: '',
         category3: '',
         category4: '',
         category5: '',
-        category6: '',
+        category6: ''
       });
     
       const handleInputChange = (e, category) => {

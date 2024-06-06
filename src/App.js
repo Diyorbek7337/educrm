@@ -8,11 +8,14 @@ import GroupTable from "./components/Admin/adminBody/adminBodyLid/groupTable/Gro
 import Login from "./components/login/Login";
 import StudentDetails from "./components/Admin/adminBody/adminBodyLid/LidTable/Student/StudentDetails";
 import { useAddDataLid } from "./components/context/AddDataLidsFromModal";
+import FetchGet from "./components/context/FetchGet";
+import PupilEdit from "./components/Admin/adminBody/adminBodyLid/pupilTable/PupilEdit";
 
 function App() {
+  const { data } = FetchGet("https://otviz-backend.vercel.app/pupils")
+  console.log('salom', data);
 
-
-  const {PeopleTables} = useAddDataLid();
+  const { PeopleTables } = useAddDataLid();
 
   const pupil = {
     name: "akbar",
@@ -26,22 +29,29 @@ function App() {
     freeTime: "15:00 - 17:00",
     date: "22-22-2222"
   }
-  
+
   return (
     <div className="App">
       <Routes>
         <Route path="login" element={<Login />} />
-        <Route path="adminBody" element={<AdminBody/>}>
-        {PeopleTables.map((data) => (
-              <Route
-                key={data._id}
-                path={`${data._id}`}
-                element={<StudentDetails id={data._id} />} // Pass id as prop to StudentDetails
-              />
-            ))}
-          <Route path="lid"element={<LidTable />}/>
-          
-          
+        <Route path="adminBody" element={<AdminBody />}>
+          {data.map((item) => (
+            <Route
+              key={item._id}
+              path={`${item._id}`}
+              element={<PupilEdit data={item} />}
+            />
+          ))}
+          {PeopleTables.map((data) => (
+            <Route
+              key={data._id}
+              path={`${data._id}`}
+              element={<StudentDetails id={data._id} />} // Pass id as prop to StudentDetails
+            />
+          ))}
+          <Route path="lid" element={<LidTable />} />
+
+
           <Route path="pupil" element={<Pupil />} />
           <Route path="groups" element={<GroupTable />} />
         </Route>

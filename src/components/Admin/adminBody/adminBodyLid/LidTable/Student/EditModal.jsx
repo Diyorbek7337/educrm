@@ -6,18 +6,23 @@ import ReactInputMask from 'react-input-mask';
 import useEdit from "./useEdit";
 import { FaUserEdit } from "react-icons/fa";
 
-function EditModal(data) {
+function EditModal({data}) {
 
-  const { handleInputChangeDataLid, addLid, addData } = useEdit(data);
+  const { handleInputChangeDataLid, setAddData, addLid, addData } = useEdit(data)
 
   const [modalShow, setModalShow] = React.useState(false);
   const handleClose = () => setModalShow(false);
+  const submit = (e) => {
+    e.preventDefault();
+    addLid();
+    setModalShow(false);
+  }
   return (
     <div>
-        <button type="button" className="deleteLidDetail editDetail" variant="primary" onClick={() => setModalShow(true)}>
-         <FaUserEdit /> Profilni tahrirlash
-        </button>
-      
+      <button type="button" className="deleteLidDetail editDetail" variant="primary" onClick={() => setModalShow(true)}>
+        <FaUserEdit /> Profilni tahrirlash
+      </button>
+
       <Modal
         show={modalShow}
         size="xl"
@@ -31,7 +36,7 @@ function EditModal(data) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={addLid}>
+          <Form onSubmit={submit}>
             <div className="formGroup">
               <Form.Group className="mb-3 inputForm" controlId="formBasicName">
                 <Form.Label>Ismini kiriting</Form.Label>
@@ -67,7 +72,7 @@ function EditModal(data) {
                   placeholder="Raqamini kiriting"
                   value={addData.pNumber}
                   required
-                  onChange={(e) => handleInputChangeDataLid(e, "phone")}
+                  onChange={(e) => handleInputChangeDataLid(e, "pNumber")}
                 />
               </Form.Group>
               <Form.Group
@@ -82,7 +87,7 @@ function EditModal(data) {
                   placeholder="Ota-Onasini raqamini kiriting"
                   value={addData.parentsNumber}
                   required
-                  onChange={(e) => handleInputChangeDataLid(e, "fphone")}
+                  onChange={(e) => handleInputChangeDataLid(e, "parentsNumber")}
                 />
               </Form.Group>
             </div>
@@ -107,7 +112,7 @@ function EditModal(data) {
                   placeholder="Yoshini kiriting"
                   value={addData.born}
                   required
-                  onChange={(e) => handleInputChangeDataLid(e, "year")}
+                  onChange={(e) => handleInputChangeDataLid(e, "born")}
                 />
               </Form.Group>
             </div>
@@ -154,7 +159,7 @@ function EditModal(data) {
                   aria-label="Default select example"
                   required
                   value={addData.sub1}
-                  onChange={(e) => handleInputChangeDataLid(e, "subject1")}
+                  onChange={(e) => handleInputChangeDataLid(e, "sub1")}
                 >
                   <option>Fan tanlovi</option>
                   <option value="Dasturlash (FrontEnd)">
@@ -180,7 +185,7 @@ function EditModal(data) {
                   aria-label="Default select example"
                   required
                   value={addData.sub2}
-                  onChange={(e) => handleInputChangeDataLid(e, "subject2")}
+                  onChange={(e) => handleInputChangeDataLid(e, "sub2")}
                 >
                   <option>Fan tanlovi (Ixtiyoriy)</option>
                   <option value="Dasturlash (FrontEnd)">

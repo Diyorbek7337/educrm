@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 
-function useEdit({data}) {
-  console.log(data._id);
+function useEdit(data) {
 
     const initialState = {
         name: data.name,
@@ -26,12 +25,14 @@ function useEdit({data}) {
       });
     };
 
-    async function addLid(e) {
-      e.preventDefault();
+    async function addLid() {
         const requestOptions = {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(initialState)
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(addData)
         };
         await fetch(`https://otviz-backend.vercel.app/lids/${data._id}`, requestOptions)
          .then((response) => console.log(response))
@@ -39,7 +40,7 @@ function useEdit({data}) {
       }
 
   return {
-    setAddData, handleInputChangeDataLid, initialState, addLid, addData
+    setAddData, handleInputChangeDataLid, addLid, addData, setAddData
   }
 }
 

@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import EditModal from "./EditModal";
 import Overlay from 'react-bootstrap/Overlay';
 import Tooltip from 'react-bootstrap/Tooltip';
+import FetchGet from "../../../../../context/FetchGet";
 
 function StudentDetails({ id }) {
   const [student, setStudent] = useState();
@@ -16,6 +17,8 @@ function StudentDetails({ id }) {
   const [loader, setLoader] = useState(true);
   const [showToolTip, setShowToolTip] = useState(false);
   const target = useRef(null);
+  const {data} = FetchGet("https://otviz-backend.vercel.app/groups");
+  console.log("groups", data);
 
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
@@ -223,10 +226,11 @@ function StudentDetails({ id }) {
                     <Form.Label className="lidDetailLabel"><span>*</span> Guruh nomi</Form.Label>
                     <Form.Select aria-label="Default select example" required >
                       <option className="lidDetailSelectTitle">Tanlash</option>
-                      <option value="guruh1">1-guruh</option>
-                      <option value="guruh2">2-guruh</option>
-                      <option value="guruh3">3-guruh</option>
-                      <option value="guruh4">4-guruh</option>
+                      {
+                        data.map((item) => (
+                          <option value={item._id}>{item.name}</option>
+                        ))
+                      }
                     </Form.Select>
                   </div>
 

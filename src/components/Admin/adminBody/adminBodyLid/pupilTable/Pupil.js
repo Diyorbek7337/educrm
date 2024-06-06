@@ -1,14 +1,19 @@
 import React,{useState} from "react";
-
-import Table from "react-bootstrap/Table";
 import "../LidTable/lidTable.css";
 import Student from "../../../../json files/student.json";
 import { useSearchPupil } from "../../../../context/SearchStudentContext";
 import { useTheme } from "../../../../context/ThemeContext";
+import FetchGet from "../../../../context/FetchGet";
+import { Link } from "react-router-dom";
+import { MdVisibility } from "react-icons/md";
 function Pupil() {
 
+  const {data} = FetchGet("https://otviz-backend.vercel.app/pupils")
+
+
   const {isNightMode} = useTheme()
-  const {searchValues, handleInputChange, filteredResults} = useSearchPupil()
+  const {searchValues, handleInputChange } = useSearchPupil()
+  console.log(data);
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 12;
@@ -65,6 +70,7 @@ function Pupil() {
                 <th className="haqida">Ustoz</th>
                 <th className="guruh">Fanlar</th>
                 <th className="sinov">To'lov</th>
+                <th className="btns">Buttons</th>
               </tr>
             </thead>
             <tbody>
@@ -138,35 +144,19 @@ function Pupil() {
                 />
               </td>
             </tr>
-              {filteredResults.length > 0 ? (
-                filteredResults.map((students, id) => (
-                  <tr key={students.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{students.id}</td>
-                    <td>{students.name}</td>
-                    <td>{students.surname}</td>
-                    <td>{students.raqam}</td>
-                    <td>{students.ustoz}</td>
-                    <td>{students.fanlar}</td>
-                    <td>{students.tolov}</td>
-                  </tr>
-                ))
-              ) : searchValues.category1 === "" ? (
-                Student.map((students, id) => (
+              {
+                data.map((students, id) => (
                   <tr key={id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
                     <td>{id + 1}</td>
                     <td>{students.name}</td>
                     <td>{students.surname}</td>
-                    <td>{students.raqam}</td>
-                    <td>{students.ustoz}</td>
-                    <td>{students.fanlar}</td>
-                    <td>{students.tolov}</td>
+                    <td>{students.pNumber}</td>
+                    <td>{students.name}</td>
+                    <td>{students.subjects.length}</td>
+                    <td>{students.parentsNumber}</td>
+                    <td><Link to={`/adminBody/${students._id}`}><MdVisibility /></Link></td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7">No information found</td>
-                </tr>
-              )}
+                ))}
             </tbody>
           </table>
         </div>
