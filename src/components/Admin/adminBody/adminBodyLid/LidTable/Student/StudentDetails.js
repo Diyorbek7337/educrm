@@ -58,13 +58,17 @@ function StudentDetails({ id }) {
       setSelectedDays(["Dush", "Chor", "Jum"]);
     } else if (value === "juft") {
       setSelectedDays(["Sesh", "Pay", "Shan"]);
-    } else {
+    }
+    else if (value === "tanlash") {
+      setSelectedDays([]);
+    }
+    else {
       setSelectedDays([]);
     }
   };
 
   useEffect(() => {
-    if (scheduleType === 'toq' || scheduleType === 'juft') {
+    if (scheduleType === 'toq' || scheduleType === 'juft' || scheduleType === 'tanlash') {
       setDisableWeeklyClasses(true);
     } else {
       setDisableWeeklyClasses(false);
@@ -320,7 +324,7 @@ function StudentDetails({ id }) {
                     <Form.Label className="lidDetailLabel"><span>*</span> Jadval turi</Form.Label>
                     <Form.Control as="select" value={scheduleType} onChange={handleScheduleTypeChange}>
 
-                      <option value="" className="lidDetailSelectTitle">Tanlash</option>
+                      <option value="tanlash" className="lidDetailSelectTitle">Tanlash</option>
                       <option value="toq">Haftaning toq kunlari</option>
                       <option value="juft">Haftaning juft kunlari</option>
                       <option value="boshqa">Hafta kunlarini tanlash</option>
@@ -401,7 +405,7 @@ function StudentDetails({ id }) {
                     <Form.Control type="date" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
                   </div>
                   <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
-                    <Form.Label className="lidDetailLabel"><span>*</span> O'qishni boshlagan sanasi</Form.Label>
+                    <Form.Label className="lidDetailLabel"><span>*</span> Dars vaqti</Form.Label>
                     <div className="formDetailTime">
                       <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
                       <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
