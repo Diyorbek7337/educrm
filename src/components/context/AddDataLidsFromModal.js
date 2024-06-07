@@ -69,12 +69,11 @@ export const AddDataLidProvider = ({ children }) => {
         const response = await fetch(URL);
 
         if (!response.ok) {
-          // throw new Error(response.statusText)
           throw new Error(response.statusText)
         }
         const data = await response.json();
         setPeopleTables(data)
-        console.log(data, "jlhfvkycfycyhfcfcgyc")
+        console.log("getData", data)
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }

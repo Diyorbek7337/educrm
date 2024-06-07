@@ -1,55 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { memo } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import ReactInputMask from 'react-input-mask';
+import useEdit from "./useEdit";
+import { FaUserEdit } from "react-icons/fa";
 
-function EditModal({ data }) {
+function EditModal(data) {
+
+  const { handleInputChangeDataLid, addLid, addData } = useEdit(data);
+
   const [modalShow, setModalShow] = React.useState(false);
-  console.log(data);
-
-  const initialState = {
-    name: data.name,
-    surname: data.surname,
-    pNumber: data.pNumber,
-    parentsNumber: data.parentsNumber,
-    address: data.address,
-    about: "",
-    born: data.born,
-    free: data.free,
-    sub1: data.sub1,
-    sub2: data.sub2,
-  };
-
-  const [addData, setAddData] = useState(initialState);
-
-  const handleInputChangeDataLid = (e, types) => {
-    const { names, value } = e.target;
-    setAddData({
-      ...addData,
-      [types]: value,
-    });
-  };
-
-  
-  async function adddd() {
-    const requestOptions = {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(initialState),
-    };
-    await fetch("http://localhost:4000/lids", requestOptions)
-     .then((response) => console.log(response))
-      .catch((err) => console.log(err));
-  }
-  function MyVerticallyCenteredModal(props) {
-    return (
+  const handleClose = () => setModalShow(false);
+  return (
+    <div>
+        <button type="button" className="deleteLidDetail editDetail" variant="primary" onClick={() => setModalShow(true)}>
+         <FaUserEdit /> Profilni tahrirlash
+        </button>
+      
       <Modal
-        {...props}
+        show={modalShow}
         size="xl"
         backdrop="static"
-        aria-labelledby="contained-modal-title-vcenter"
         centered
+        onHide={handleClose}
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
@@ -57,7 +31,7 @@ function EditModal({ data }) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={adddd}>
+          <Form onSubmit={addLid}>
             <div className="formGroup">
               <Form.Group className="mb-3 inputForm" controlId="formBasicName">
                 <Form.Label>Ismini kiriting</Form.Label>
@@ -91,7 +65,7 @@ function EditModal({ data }) {
                   mask="+\9\9\8 (99) 999-99-99"
                   type="text"
                   placeholder="Raqamini kiriting"
-                  value={addData.phone}
+                  value={addData.pNumber}
                   required
                   onChange={(e) => handleInputChangeDataLid(e, "phone")}
                 />
@@ -106,7 +80,7 @@ function EditModal({ data }) {
                   mask="+\9\9\8 (99) 999-99-99"
                   type="text"
                   placeholder="Ota-Onasini raqamini kiriting"
-                  value={addData.fphone}
+                  value={addData.parentsNumber}
                   required
                   onChange={(e) => handleInputChangeDataLid(e, "fphone")}
                 />
@@ -131,7 +105,7 @@ function EditModal({ data }) {
                 <Form.Control
                   type="date"
                   placeholder="Yoshini kiriting"
-                  value={addData.year}
+                  value={addData.born}
                   required
                   onChange={(e) => handleInputChangeDataLid(e, "year")}
                 />
@@ -179,7 +153,7 @@ function EditModal({ data }) {
                 <Form.Select
                   aria-label="Default select example"
                   required
-                  value={addData.subject1}
+                  value={addData.sub1}
                   onChange={(e) => handleInputChangeDataLid(e, "subject1")}
                 >
                   <option>Fan tanlovi</option>
@@ -205,7 +179,7 @@ function EditModal({ data }) {
                 <Form.Select
                   aria-label="Default select example"
                   required
-                  value={addData.subject2}
+                  value={addData.sub2}
                   onChange={(e) => handleInputChangeDataLid(e, "subject2")}
                 >
                   <option>Fan tanlovi (Ixtiyoriy)</option>
@@ -230,24 +204,9 @@ function EditModal({ data }) {
             </Button>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
       </Modal>
-    );
-  }
-    return (
-        <div>
-          <span variant="primary" onClick={() => setModalShow(true)}>
-            Profilni ahrirlash
-          </span>
-    
-          <MyVerticallyCenteredModal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-          />
-        </div>
-      );
+    </div>
+  )
 }
 
-export default EditModal;
+export default memo(EditModal);
