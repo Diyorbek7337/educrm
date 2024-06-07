@@ -56,9 +56,29 @@
         padding: 10px 25px !important;
     }
 
-    .tab__8 {
-        display: none !important;
+    .tab__1 {
+        width: 0.1% !important;
     }
+
+    .tartib {
+        width: 36px;
+    }
+
+    .delete {
+        display: none;
+    }
+
+    .actionstab {
+        padding: 2px;
+    }
+
+    .actions::after {
+        content: "A";
+        text-align: center;
+        left: 10px;
+    }
+
+
 }
 
 
@@ -133,6 +153,10 @@
 
     .titleLists {
         font-size: 18px !important;
+    }
+
+    td {
+        font-size: 14px;
     }
 }
 
