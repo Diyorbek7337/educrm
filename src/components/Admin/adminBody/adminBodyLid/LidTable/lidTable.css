@@ -195,8 +195,10 @@ td input {
     border: none;
 }
 
-.actions {
+.actionstab {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px;
+    height: 65px;
 }

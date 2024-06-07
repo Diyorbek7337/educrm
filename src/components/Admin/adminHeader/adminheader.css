@@ -11,39 +11,47 @@
     background-color: var(--light-mode);
     color: var(--dark-mode);
 }
+
 .adminHeaderBox.dark {
     background-color: #111827;
     border-bottom: 1px solid var(--light-border-color);
     color: var(--light-mode);
 }
+
 .adminHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 98%;
     margin: 0 auto;
-    
+
 }
+
 /* .page-link.active.dark {
     background-color: #053b80;
 } */
-.leftHeaderBox, .user {
+.leftHeaderBox,
+.user {
     display: flex;
     align-items: center;
 }
+
 .leftHeaderBox {
     gap: 50px;
-    width:40%;
+    width: 40%;
 }
+
 .logo h1 {
     margin: 0;
 }
+
 .user {
     gap: 10px;
     justify-content: flex-end;
     align-items: center;
     display: flex;
 }
+
 .user .userImg {
     width: 5%;
     border: 1px solid black;
@@ -54,23 +62,27 @@
 .userImg img {
     width: 100%;
 }
+
 .search {
     display: flex;
     align-items: center;
     position: relative;
     width: 100%;
 }
+
 .search label {
     position: absolute;
     left: 10px;
     top: 5px;
     color: #9ca3af;
 }
+
 .searchBar {
     position: relative;
 }
+
 .search input {
-    width:100%;
+    width: 100%;
     padding: 5px;
     outline: none;
     border: 1px solid #c4c2c2;
@@ -78,20 +90,24 @@
     border-radius: 10px;
 }
 
-h1,h2 {
+h1,
+h2 {
     font-size: 22px !important;
     line-height: 15px !important;
 }
-.userInfo h2{
+
+.userInfo h2 {
     margin-bottom: 10px;
     font-weight: 500;
     letter-spacing: -0.2px;
 }
+
 .userInfo p {
     color: #9ca3af;
     font-size: 14px;
     margin: 0;
 }
+
 .searchResultBar {
     position: absolute;
     background-color: #9ca3af81;
@@ -104,40 +120,53 @@ h1,h2 {
     display: block;
     /* left: 120px; */
 }
+
 .searchResultBar li:hover {
     background-color: #9ca3af;
     cursor: pointer;
 }
+
 .searchResultBar.off {
     display: none;
 }
+
 .rejim {
     background-color: transparent;
-    border:none;
+    border: none;
     cursor: pointer;
 }
+
 .sun {
     color: rgb(255, 162, 0);
     font-size: 26px;
 }
+
 .moon {
     color: white;
-    font-size: 23px;
+    font-size: 22px;
+}
+
+.userImg,
+.userInfo {
+    cursor: pointer;
 }
 
 @media (max-width: 992px) {
     .leftHeaderBox {
         width: 60%;
     }
-    .user .userImg{
+
+    .user .userImg {
         width: 8%;
     }
 }
+
 @media (max-width:768px) {
     .leftHeaderBox {
         width: 100%;
         gap: 30px;
     }
+
     .user .userImg {
         width: 10%;
     }

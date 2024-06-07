@@ -160,7 +160,7 @@ function GroupTable() {
                 <Link to={`/adminBody/${peopleTable._id}`}>
                   <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
                     <td>{peopleTable[index + 1]}</td>
-                    <td>{peopleTable.groupName}</td>
+                    <td >{peopleTable.groupName}</td>
                     <td>{peopleTable.subName}</td>
                     <td>{peopleTable.techName}</td>
                     <td>{peopleTable.classRoom}</td>

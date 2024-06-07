@@ -1,0 +1,143 @@
+.offcanvas {
+    transition: 0.2s !important;
+}
+
+@media (max-width: 1050px) {
+    .responsive__hide {
+        display: block;
+    }
+
+    .leftMenuBar {
+        display: none;
+    }
+
+    .leftSideBar {
+        width: 0px;
+        border-right: 0;
+    }
+
+    .mainBody {
+        width: 100%;
+    }
+
+    .lidTableHeader {
+        padding: 10px 15px 10px 37px;
+    }
+
+    .lidHeaderSecond {
+        padding: 10px 35px !important;
+    }
+
+    td input {
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .lidTableBody {
+        overflow: unset;
+    }
+
+    .userInfo {
+        width: 35%;
+    }
+
+    .userInfo h2 {
+        line-height: 20px !important;
+        margin-bottom: 0;
+        font-size: 18px !important;
+    }
+
+    .titleLists {
+        font-size: 20px !important;
+    }
+
+    .lidHeaderSecond {
+        padding: 10px 25px !important;
+    }
+
+    .tab__8 {
+        display: none !important;
+    }
+}
+
+
+
+@media (max-width: 677px) {
+    .tab__7 {
+        display: none !important;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .tab__5,
+    .tab__4 {
+        display: none !important;
+        ;
+    }
+
+    th,
+    td {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 520px) {
+    .user {
+        width: 90%;
+        gap: 5px;
+    }
+
+    .userImg img {
+        width: 100% !important;
+        height: 100%;
+    }
+
+    .userImg {
+        width: 20% !important;
+    }
+
+    .breadcrumb {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .breadcrumb li {
+        padding: 0 !important;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {
+        display: none;
+    }
+
+    .addLid {
+        padding: 7px 13px;
+    }
+
+    .responsive__hide-button {
+        top: 3px;
+        left: 8px;
+    }
+}
+
+@media (max-width: 445px) {
+    .user {
+        width: 70%;
+    }
+
+    .lidHeaderSecond {
+        padding: 10px 10px !important;
+    }
+
+    .titleLists {
+        font-size: 18px !important;
+    }
+}
+
+@media (max-width:320px) {
+    td {
+        padding: 5px 0px;
+    }
+}
