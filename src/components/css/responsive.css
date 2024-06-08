@@ -9,6 +9,11 @@
     gap: 10px;
 }
 
+.actions::after {
+    content: "Action";
+    text-align: center;
+    left: 10px;
+}
 
 @media (max-width: 1440px) {
 
@@ -90,10 +95,17 @@
         padding: 2px;
     }
 
+
     .actions::after {
         content: "A";
         text-align: center;
+        justify-content: center;
         left: 10px;
+    }
+
+    .actions {
+        height: 52.8px;
+        align-items: center;
     }
 
     .userInfo h2 {
@@ -109,12 +121,21 @@
     .user .userImg {
         width: 40px;
     }
+
+    .titleLists {
+        padding-left: 20px !important;
+    }
 }
 
 @media (max-width: 677px) {
     .tab__7 {
         display: none !important;
     }
+
+    .lidTableBody td {
+        font-size: 16px;
+    }
+
 }
 
 
@@ -159,16 +180,17 @@
     .res__none {
         display: none;
     }
+
+    .titleLists {
+        padding-left: 22px !important;
+        font-size: 14px !important;
+    }
 }
 
 @media (max-width: 445px) {
 
     .lidHeaderSecond {
         padding: 10px 10px !important;
-    }
-
-    .titleLists {
-        font-size: 18px !important;
     }
 
     td {
@@ -179,5 +201,9 @@
 @media (max-width:320px) {
     td {
         padding: 5px 0px;
+    }
+
+    .lidTableBody td {
+        padding: 2px;
     }
 }

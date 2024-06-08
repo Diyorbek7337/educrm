@@ -22,18 +22,28 @@ function LeftSideBar() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
     function leftSideBarMenu() {
         return (
             <div className={show ? null : "leftMenuBar"} >
                 <ul className='leftMenu'>
                     <NavLink to='lid'>
-                        <li className='leftMenuItem' onClick={() => handleItemClick('lid')}><FaUserFriends className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>Lidlar</span></li>
+                        <li className='leftMenuItem' onClick={() => {
+                            handleItemClick('lid')
+                            setShow(false)
+                        }}><FaUserFriends className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>Lidlar</span></li>
                     </NavLink>
                     <NavLink to='pupil'>
-                        <li className='leftMenuItem' onClick={() => handleItemClick('pupil')}><IoSchool className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>O'quvchilar</span></li>
+                        <li className='leftMenuItem' onClick={() => {
+                            handleItemClick('pupil')
+                            setShow(false)
+                        }}><IoSchool className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>O'quvchilar</span></li>
                     </NavLink>
                     <NavLink to='groups'>
-                        <li className='leftMenuItem' onClick={() => handleItemClick('group')}><FaUsers className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>Guruhlar</span></li>
+                        <li className='leftMenuItem' onClick={() => {
+                            handleItemClick('group')
+                            setShow(false)
+                        }}><FaUsers className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>Guruhlar</span></li>
                     </NavLink>
                 </ul>
                 <NavLink to='/login'>
