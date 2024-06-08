@@ -28,21 +28,20 @@ function AdminHeader() {
 
                 </div>
                 <div className='rightHeaderBox'>
-
                     <div className='user'>
                         <button className='rejim' onClick={toggleNightMode}>
                             {isNightMode
-
                                 ? <FaSun className='sun' />
-
                                 : <FaMoon className='moon' />}
                         </button>
-                        <div className='userImg'>
-                            <img src={UserImg} alt='user' />
-                        </div>
-                        <div className='userInfo'>
-                            <h2>Abdiqayumov Diyorbek</h2>
-                            <p>Admin</p>
+                        <div className='user__info'>
+                            <div className='userImg'>
+                                <img src={UserImg} alt='user' />
+                            </div>
+                            <div className='userInfo'>
+                                <h2>Abdiqayumov Diyorbek</h2>
+                                <p>Admin</p>
+                            </div>
                         </div>
                     </div>
                 </div>
