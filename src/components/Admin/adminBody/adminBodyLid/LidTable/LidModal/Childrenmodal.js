@@ -26,7 +26,7 @@ function Childrenmodal() {
                 <Modal.Title>Lidlarni Qo'shish</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={setdata}>
+                <Form onSubmit={setdata} className='addNewModalForm'>
                     <div className='formGroup'>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicName">
                             <Form.Label>Ismini kiriting</Form.Label>
@@ -52,7 +52,7 @@ function Childrenmodal() {
                             <Form.Label>Manzilini kiriting</Form.Label>
                             <Form.Control type="text" placeholder="Manzilini kiriting" value={addData.address} required onChange={(e) => handleInputChangeDataLid(e, 'address')} />
                         </Form.Group>
-                        <Form.Group className="mb-3 inputForm" controlId="formBasicAge">
+                        <Form.Group className="mb-3 inputForm mbmr-3" controlId="formBasicAge">
                             <Form.Label>Yoshini kiriting</Form.Label>
                             <Form.Control type="date" placeholder="Yoshini kiriting" value={addData.born} required onChange={(e) => handleInputChangeDataLid(e, 'born')} />
                         </Form.Group>
@@ -83,7 +83,6 @@ function Childrenmodal() {
                         </div>
                     </div>
                     <div className='formGroup mt-3'>
-
                         <div className='formGroupSelect'>
                             <Form.Label>Fan tanlovi</Form.Label>
                             <Form.Select aria-label="Default select example" required value={addData.sub1} onChange={(e) => handleInputChangeDataLid(e, 'sub1')}>
