@@ -47,6 +47,7 @@
 .responsive__hide {
     position: relative;
     display: none;
+    font-size: 20px;
 }
 
 .responsive__hide-button {

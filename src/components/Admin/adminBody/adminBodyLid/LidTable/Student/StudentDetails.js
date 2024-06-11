@@ -17,7 +17,7 @@ function StudentDetails({ id }) {
  const { dayAbbreviations, selectedDays, scheduleType, weeklyClasses, handleCheckboxChange, removeDay, handleScheduleTypeChange, handleWeeklyClassesChange, disableWeeklyClasses} = useSchedule();
   
 
-  
+
 
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
@@ -244,19 +244,18 @@ function StudentDetails({ id }) {
             <div className="lidDetailRightBottomContent">
               <Form>
                 <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
-                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom' controlId="scheduleType">
+                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom mbmr-3' controlId="scheduleType">
                     <Form.Label className="lidDetailLabel"><span>*</span> Jadval turi</Form.Label>
                     <Form.Control as="select" value={scheduleType} onChange={handleScheduleTypeChange}>
-
                       <option value="tanlash" className="lidDetailSelectTitle">Tanlash</option>
                       <option value="toq">Haftaning toq kunlari</option>
                       <option value="juft">Haftaning juft kunlari</option>
                       <option value="boshqa">Hafta kunlarini tanlash</option>
                     </Form.Control>
                   </div>
-                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
+                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom mbmr-3 dsmr">
                     <Form.Label className="lidDetailLabel"><span>*</span> Bir haftadagi darslar soni</Form.Label>
-                    <div className="formRadioGroup">
+                    <div className="formRadioGroup widmr">
                       <div className="formRadioItem">
                         <Form.Check
                           type="radio"
@@ -268,7 +267,10 @@ function StudentDetails({ id }) {
                           onChange={handleWeeklyClassesChange}
                           disabled={disableWeeklyClasses}
                         />
-                        <Form.Label htmlFor="radio3" className="radioLabel lidDetailLabel">3 marta</Form.Label>
+                        <Form.Label htmlFor="radio3" className="radioLabel lidDetailLabel">
+                          <p>3</p>
+                          <p>marta</p>
+                        </Form.Label>
                       </div>
                       <div className="formRadioItem">
                         <Form.Check
@@ -281,7 +283,10 @@ function StudentDetails({ id }) {
                           onChange={handleWeeklyClassesChange}
                           disabled={disableWeeklyClasses}
                         />
-                        <Form.Label htmlFor="radio4" className="radioLabel lidDetailLabel">4 marta</Form.Label>
+                        <Form.Label htmlFor="radio4" className="radioLabel lidDetailLabel">
+                          <p>4</p>
+                          <p>marta</p>
+                        </Form.Label>
                       </div>
                       <div className="formRadioItem">
                         <Form.Check
@@ -294,7 +299,10 @@ function StudentDetails({ id }) {
                           onChange={handleWeeklyClassesChange}
                           disabled={disableWeeklyClasses}
                         />
-                        <Form.Label htmlFor="radio5" className="radioLabel lidDetailLabel">5 marta</Form.Label>
+                        <Form.Label htmlFor="radio5" className="radioLabel lidDetailLabel">
+                          <p>5</p>
+                          <p>marta</p>
+                        </Form.Label>
                       </div>
                     </div>
                   </div>
@@ -324,7 +332,7 @@ function StudentDetails({ id }) {
 
                 </div>
                 <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
-                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
+                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom mbmr-3">
                     <Form.Label className="lidDetailLabel"><span>*</span> O'qishni boshlagan sanasi</Form.Label>
                     <Form.Control type="date" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
                   </div>

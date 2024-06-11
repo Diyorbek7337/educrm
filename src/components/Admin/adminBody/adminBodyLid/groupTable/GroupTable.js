@@ -40,8 +40,6 @@ function GroupTable() {
   return (
     <div className='groupTable'>
       <div className={isNightMode ? 'lidHeaderSecond' : 'lidHeaderSecond dark'}>
-
-
         <h2 className={isNightMode ? 'titleLists' : 'titleLists dark'}>Guruhlar ro'yhati</h2>
         <ul className="pagination">
           <li className="page-item">
@@ -70,20 +68,20 @@ function GroupTable() {
         <table className={isNightMode ? "tables" : "tables darks"}>
           <thead>
             <tr className={isNightMode ? 'tr' : 'tr dark'}>
-              <th className='tartib'>No.</th>
-              <th className='ism'>Guruh nomi</th>
-              <th className="familiya">Fan nomi</th>
-              <th className="raqam">O'qituvchi F.I.SH</th>
-              <th className="haqida">Xona</th>
-              <th className="guruh">Dars kunlari</th>
-              <th className="sinov">Dars vaqti</th>
-              <th className='actions'>Boshqaruv</th>
+              <th className='tab__1 tartib'>No.</th>
+              <th className='tab__2 ism'>Guruh nomi</th>
+              <th className="tab__3 familiya">Fan nomi</th>
+              <th className="tab__4 raqam">O'qituvchi F.I.SH</th>
+              <th className="tab__5 haqida">Xona</th>
+              <th className="tab__6 guruh">Dars kunlari</th>
+              <th className="tab__7 sinov">Dars vaqti</th>
+              <th className='tab__8 actions'></th>
             </tr>
           </thead>
           <tbody>
             <tr className={isNightMode ? "searchRow" : "searchRow dark"}>
-              <td className="tartib"></td>
-              <td>
+              <td className="tartib tab__1"></td>
+              <td className='tab__2'>
                 <input
                   type="text"
                   name="searchLid"
@@ -94,7 +92,7 @@ function GroupTable() {
                   onChange={(e) => handleInputChange(e, 'category1')}
                 />
               </td>
-              <td>
+              <td className='tab__3'>
                 <input
                   type="text"
                   className="searchLid"
@@ -105,7 +103,7 @@ function GroupTable() {
                   placeholder="...Izlash"
                 />
               </td>
-              <td>
+              <td className='tab__3'>
                 <input
                   type="text"
                   name="searchLid"
@@ -116,7 +114,7 @@ function GroupTable() {
                   placeholder="...Izlash"
                 />
               </td>
-              <td>
+              <td className='tab__4'>
                 <input
                   type="text"
                   name="searchLid"
@@ -127,7 +125,7 @@ function GroupTable() {
                   onChange={(e) => handleInputChange(e, 'category4')}
                 />
               </td>
-              <td>
+              <td className='tab__5'>
                 <input
                   type="text"
                   name="searchLid"
@@ -138,7 +136,7 @@ function GroupTable() {
                   onChange={(e) => handleInputChange(e, 'category5')}
                 />
               </td>
-              <td>
+              <td className='tab__6'>
                 <input
                   type="text"
                   name="searchLid"
@@ -152,20 +150,20 @@ function GroupTable() {
               </td>
             </tr>
             {loader && <tr>
-              <td> <Spinner animation="border" /></td>
+              <td className='tab__7'> <Spinner animation="border" /></td>
             </tr>}
 
             {filteredResults.length > 0 ? (
               filteredResults.map((peopleTable, index) => (
                 <Link to={`/adminBody/${peopleTable._id}`}>
                   <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{peopleTable[index + 1]}</td>
-                    <td >{peopleTable.groupName}</td>
-                    <td>{peopleTable.subName}</td>
-                    <td>{peopleTable.techName}</td>
-                    <td>{peopleTable.classRoom}</td>
-                    <td>{peopleTable.lessDay}</td>
-                    <td>{peopleTable.lessTime}</td>
+                    <td className='tab__1'>{peopleTable[index + 1]}</td>
+                    <td className='tab__2'>{peopleTable.groupName}</td>
+                    <td className='tab__3'>{peopleTable.subName}</td>
+                    <td className='tab__4'>{peopleTable.techName}</td>
+                    <td className='tab__5'>{peopleTable.classRoom}</td>
+                    <td className='tab__6'>{peopleTable.lessDay}</td>
+                    <td className='tab__7'>{peopleTable.lessTime}</td>
                   </tr>
                 </Link>
               ))
@@ -173,14 +171,14 @@ function GroupTable() {
               searchValues.category1 === "" ? (
                 records.map((peopleTable, index) => (
                   <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{index + 1}</td>
-                    <td>{peopleTable.groupName}</td>
-                    <td>{peopleTable.subName}</td>
-                    <td>{peopleTable.techName}</td>
-                    <td>{peopleTable.classRoom}</td>
-                    <td>{peopleTable.lessDay}</td>
-                    <td>{peopleTable.lessTime}</td>
-                    <td className='actions'>
+                    <td className='tab__1'>{index + 1}</td>
+                    <td className='tab__2'>{peopleTable.groupName}</td>
+                    <td className='tab__3'>{peopleTable.subName}</td>
+                    <td className='tab__4'>{peopleTable.techName}</td>
+                    <td className='tab__5'>{peopleTable.classRoom}</td>
+                    <td className='tab__6'>{peopleTable.lessDay}</td>
+                    <td className='tab__7'>{peopleTable.lessTime}</td>
+                    <td className='actionstab tab__8'>
                       {/* <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button> */}
                       <Link to={`/adminBody/${peopleTable._id}`}>
                         <button className='visible'><MdVisibility /></button>

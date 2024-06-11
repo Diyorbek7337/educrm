@@ -4,13 +4,13 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import "./lidmodal.css"
 import { useModal } from '../../../../../context/Addmodal';
-import {useAddDataLid} from '../../../../../context/AddDataLidsFromModal'
-import {  ModalFooter } from 'react-bootstrap';
+import { useAddDataLid } from '../../../../../context/AddDataLidsFromModal'
+import { ModalFooter } from 'react-bootstrap';
 import ReactInputMask from 'react-input-mask';
 
 function Childrenmodal() {
     const { show, handleClose } = useModal()
-    const {addData, handleInputChangeDataLid, setdata} = useAddDataLid()
+    const { addData, handleInputChangeDataLid, setdata } = useAddDataLid()
 
 
     return (
@@ -26,35 +26,35 @@ function Childrenmodal() {
                 <Modal.Title>Lidlarni Qo'shish</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={setdata}>
+                <Form onSubmit={setdata} className='addNewModalForm'>
                     <div className='formGroup'>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicName">
                             <Form.Label>Ismini kiriting</Form.Label>
-                            <Form.Control value={addData.name} onChange={(e) => handleInputChangeDataLid(e, 'name')} type="text" placeholder="Ismini kiriting" required/>
+                            <Form.Control value={addData.name} onChange={(e) => handleInputChangeDataLid(e, 'name')} type="text" placeholder="Ismini kiriting" required />
                         </Form.Group>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicSurname">
                             <Form.Label>Familiyasini kiriting</Form.Label>
-                            <Form.Control type="text" placeholder="Familiyasini kiriting" value={addData.surname} required onChange={(e) => handleInputChangeDataLid(e, 'surname')}/>
+                            <Form.Control type="text" placeholder="Familiyasini kiriting" value={addData.surname} required onChange={(e) => handleInputChangeDataLid(e, 'surname')} />
                         </Form.Group>
                     </div>
                     <div className='formGroup'>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicPhone">
                             <Form.Label>Raqamini kiriting</Form.Label>
-                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Raqamini kiriting" value={addData.pNumber} required onChange={(e) => handleInputChangeDataLid(e, 'pNumber')}/>
+                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Raqamini kiriting" value={addData.pNumber} required onChange={(e) => handleInputChangeDataLid(e, 'pNumber')} />
                         </Form.Group>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicFphone">
                             <Form.Label>Ota-onasini raqamini kiriting</Form.Label>
-                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Ota-Onasini raqamini kiriting" value={addData.parentsNumber} required onChange={(e) => handleInputChangeDataLid(e, 'parentsNumber')}/>
+                            <ReactInputMask className='form-control' mask="+\9\9\8 (99) 999-99-99" type="text" placeholder="Ota-Onasini raqamini kiriting" value={addData.parentsNumber} required onChange={(e) => handleInputChangeDataLid(e, 'parentsNumber')} />
                         </Form.Group>
                     </div>
                     <div className='formGroup'>
                         <Form.Group className="mb-3 inputForm" controlId="formBasicAddress">
                             <Form.Label>Manzilini kiriting</Form.Label>
-                            <Form.Control type="text" placeholder="Manzilini kiriting" value={addData.address} required onChange={(e) => handleInputChangeDataLid(e, 'address')}/>
-                        </Form.Group> 
-                        <Form.Group className="mb-3 inputForm" controlId="formBasicAge">
+                            <Form.Control type="text" placeholder="Manzilini kiriting" value={addData.address} required onChange={(e) => handleInputChangeDataLid(e, 'address')} />
+                        </Form.Group>
+                        <Form.Group className="mb-3 inputForm mbmr-3" controlId="formBasicAge">
                             <Form.Label>Yoshini kiriting</Form.Label>
-                            <Form.Control type="date" placeholder="Yoshini kiriting" value={addData.born} required onChange={(e) => handleInputChangeDataLid(e, 'born')}/>
+                            <Form.Control type="date" placeholder="Yoshini kiriting" value={addData.born} required onChange={(e) => handleInputChangeDataLid(e, 'born')} />
                         </Form.Group>
                     </div>
                     <div className='formGroup'>
@@ -83,7 +83,6 @@ function Childrenmodal() {
                         </div>
                     </div>
                     <div className='formGroup mt-3'>
-
                         <div className='formGroupSelect'>
                             <Form.Label>Fan tanlovi</Form.Label>
                             <Form.Select aria-label="Default select example" required value={addData.sub1} onChange={(e) => handleInputChangeDataLid(e, 'sub1')}>
@@ -108,9 +107,9 @@ function Childrenmodal() {
                         </div>
                     </div>
                     <Button type='submit' variant="success save">Saqlash</Button>
-                   
+
                 </Form>
-                 
+
             </Modal.Body>
         </Modal>
 

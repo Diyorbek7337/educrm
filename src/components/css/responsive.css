@@ -1,6 +1,54 @@
 .offcanvas {
-    transition: 0.2s !important;
+    transition: 0.1s !important;
 }
+
+.user__info {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    gap: 10px;
+}
+
+.actions::after {
+    content: "Action";
+    text-align: center;
+    left: 10px;
+}
+
+.mbmr-3 {
+    margin-bottom: 20px !important;
+}
+
+@media (max-width: 1440px) {
+
+    h1,
+    h2 {
+        font-size: 20px !important;
+        line-height: 20px !important;
+    }
+
+    .userInfo h2 {
+        margin-bottom: 0px;
+    }
+
+    .radioLabel {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .radioLabel p {
+        margin: 0 !important;
+    }
+
+    .formRadioItem {
+        display: flex;
+        align-items: center;
+    }
+
+
+}
+
 
 @media (max-width: 1050px) {
     .responsive__hide {
@@ -31,15 +79,33 @@
     td input {
         padding-left: 10px;
     }
+
+    .lidDetailRightTopContentItem {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .formGroupSelect {
+        width: 45%;
+    }
+
+    .lidDetailBody {
+        flex-direction: column;
+    }
+
+    .lidDetailBodyLeft {
+        width: 100%;
+    }
+
+    .lidDetailBodyRight {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
     .lidTableBody {
         overflow: unset;
-    }
-
-    .userInfo {
-        width: 35%;
     }
 
     .userInfo h2 {
@@ -72,20 +138,64 @@
         padding: 2px;
     }
 
+
     .actions::after {
         content: "A";
         text-align: center;
+        justify-content: center;
         left: 10px;
     }
 
+    .actions {
+        height: 52.8px;
+        align-items: center;
+    }
 
+    .userInfo h2 {
+        display: none;
+    }
+
+    .user__info {
+        flex-direction: column;
+        width: 50px;
+        gap: 2px;
+    }
+
+    .user .userImg {
+        width: 40px;
+    }
+
+    .titleLists {
+        padding-left: 20px !important;
+    }
 }
-
-
 
 @media (max-width: 677px) {
     .tab__7 {
         display: none !important;
+    }
+
+    .lidTableBody td {
+        font-size: 16px;
+    }
+
+    .formGroupSelect {
+        width: 100%;
+    }
+
+    .lidDataReg {
+        margin-bottom: 20px;
+    }
+
+
+    .dsmr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .widmr {
+        width: 220px;
     }
 }
 
@@ -95,33 +205,19 @@
     .tab__5,
     .tab__4 {
         display: none !important;
-        ;
     }
 
     th,
     td {
-        padding: 5px;
+        padding: 2px;
     }
 }
 
 @media (max-width: 520px) {
-    .user {
-        width: 90%;
-        gap: 5px;
-    }
-
-    .userImg img {
-        width: 100% !important;
-        height: 100%;
-    }
-
-    .userImg {
-        width: 20% !important;
-    }
-
     .breadcrumb {
         flex-direction: column;
         align-items: start;
+        padding-left: 10px;
     }
 
     .breadcrumb li {
@@ -137,31 +233,82 @@
     }
 
     .responsive__hide-button {
-        top: 3px;
-        left: 8px;
+        top: -5px;
+        left: 5px;
+        font-size: 25px;
+    }
+
+    .res__none {
+        display: none;
+    }
+
+    .titleLists {
+        padding-left: 22px !important;
+        font-size: 14px !important;
+    }
+
+    .pagination li a {
+        padding: 5px 7px;
+    }
+
+    .addNewModalForm {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .formGroup {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+    }
+
+    .inputForm {
+        width: 100%;
+        margin: 0 !important;
+    }
+
+    .formGroupSelect {
+        width: 100%;
+    }
+
+
+
+    .modal {
+        padding: 0 !important;
+        width: 100% !important;
     }
 }
 
 @media (max-width: 445px) {
-    .user {
-        width: 70%;
-    }
 
     .lidHeaderSecond {
         padding: 10px 10px !important;
     }
 
-    .titleLists {
-        font-size: 18px !important;
-    }
-
     td {
         font-size: 14px;
+    }
+
+    .formDetailTime {
+        flex-direction: column;
+    }
+
+    .deleteLidDetail {
+        padding: 7px;
+        font-size: 14px;
+    }
+
+    .lidDetailHeader {
+        padding: 0 7px 20px 0;
     }
 }
 
 @media (max-width:320px) {
     td {
         padding: 5px 0px;
+    }
+
+    .lidTableBody td {
+        padding: 2px;
     }
 }
