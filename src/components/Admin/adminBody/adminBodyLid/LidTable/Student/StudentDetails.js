@@ -339,8 +339,6 @@ function StudentDetails({ id }) {
                     <div className="formDetailTime">
                       <TimePicker />
                       <TimePicker/>
-                      {/* <Form.Control type="time" step={3600} placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
-                      <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" /> */}
                     </div>
                   </div>
 
