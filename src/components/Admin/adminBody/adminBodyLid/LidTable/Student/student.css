@@ -142,12 +142,9 @@
     display: flex;
     gap: 30px;
     row-gap: 0 !important;
-    
-    /* flex-wrap: wrap; */
+
 }
-.lidDetailRightTopContentItemBottom {
-    align-items: center;
-}
+
 .lidDetailSelectTitle {
     color: #b0afaf;
 }
@@ -160,8 +157,9 @@
 }
 .formRadioItem {
     display: flex;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
+    
 }
 .radioLabel {
     margin: 0 !important;
@@ -170,6 +168,7 @@
 .formRadioGroup {
     display: flex;
     gap: 15px;
+    /* justify-content: center; */
     width: 100%;
 }
 .lidDetailFormBottom {

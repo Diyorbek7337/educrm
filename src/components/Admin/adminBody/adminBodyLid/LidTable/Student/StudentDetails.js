@@ -5,6 +5,7 @@ import { useTheme } from "../../../../../context/ThemeContext";
 import Form from 'react-bootstrap/Form';
 import EditModal from "./EditModal";
 import { useSchedule } from "../../../../../context/addSchedule";
+import TimePicker from "./TimePicker/TimePicker";
 
 
 function StudentDetails({ id }) {
@@ -268,8 +269,7 @@ function StudentDetails({ id }) {
                           disabled={disableWeeklyClasses}
                         />
                         <Form.Label htmlFor="radio3" className="radioLabel lidDetailLabel">
-                          <p>3</p>
-                          <p>marta</p>
+                          3
                         </Form.Label>
                       </div>
                       <div className="formRadioItem">
@@ -284,8 +284,7 @@ function StudentDetails({ id }) {
                           disabled={disableWeeklyClasses}
                         />
                         <Form.Label htmlFor="radio4" className="radioLabel lidDetailLabel">
-                          <p>4</p>
-                          <p>marta</p>
+                          4
                         </Form.Label>
                       </div>
                       <div className="formRadioItem">
@@ -300,8 +299,7 @@ function StudentDetails({ id }) {
                           disabled={disableWeeklyClasses}
                         />
                         <Form.Label htmlFor="radio5" className="radioLabel lidDetailLabel">
-                          <p>5</p>
-                          <p>marta</p>
+                          5
                         </Form.Label>
                       </div>
                     </div>
@@ -339,8 +337,10 @@ function StudentDetails({ id }) {
                   <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
                     <Form.Label className="lidDetailLabel"><span>*</span> Dars vaqti</Form.Label>
                     <div className="formDetailTime">
-                      <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
-                      <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
+                      <TimePicker />
+                      <TimePicker/>
+                      {/* <Form.Control type="time" step={3600} placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" />
+                      <Form.Control type="time" placeholder="O'qishni boshlagan sanasi" required className="lidDetailInputTime" /> */}
                     </div>
                   </div>
 

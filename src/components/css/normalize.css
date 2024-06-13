@@ -377,3 +377,15 @@ template {
 [hidden] {
     display: none;
 }
+::-webkit-scrollbar {
+    width: 12px !important;
+  
+}
+::-webkit-scrollbar-track {
+    background-color: rgb(245, 241, 236);
+}
+::-webkit-scrollbar-thumb {
+    background: #686868;
+    border-radius: 10px;
+
+}

@@ -201,4 +201,5 @@ td input {
     justify-content: center !important;
     padding: 8px;
     height: 65px;
+    gap: 5px;
 }
