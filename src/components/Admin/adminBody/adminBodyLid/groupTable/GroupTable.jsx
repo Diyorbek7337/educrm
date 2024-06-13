@@ -7,10 +7,13 @@ import { PiSealCheckFill } from "react-icons/pi";
 import { Link, NavLink } from 'react-router-dom';
 import { MdVisibility } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import GroupJson from "../../../../json files/groups.json"
+import GroupJson from "../../../../json files/groups.json";
+import FetchGet from '../../../../context/FetchGet'
+import './groupTable.css';
 
 function GroupTable() {
   const { deleteData, PeopleTables, loader, showWarning, showDelete } = useAddDataLid()
+  const { data } = FetchGet("https://otviz-backend.vercel.app/groups");
 
   const { searchValues, handleInputChange, filteredResults } = useSearch()
   const { isNightMode } = useTheme("")
@@ -43,6 +46,9 @@ function GroupTable() {
 
 
         <h2 className={isNightMode ? 'titleLists' : 'titleLists dark'}>Guruhlar ro'yhati</h2>
+        <div>
+          <Link to={"/adminbody/addgroup"}>Guruh qo'shish</Link>
+        </div>
         <ul className="pagination">
           <li className="page-item">
             <a href="#" className={isNightMode ? "page-link" : "page-link dark"} onClick={prePage}>Prev</a>
@@ -74,7 +80,7 @@ function GroupTable() {
               <th className='ism'>Guruh nomi</th>
               <th className="familiya">Fan nomi</th>
               <th className="raqam">O'qituvchi F.I.SH</th>
-              <th className="haqida">Xona</th>
+              <th className="haqida">O'quvchilar soni</th>
               <th className="guruh">Dars kunlari</th>
               <th className="sinov">Dars vaqti</th>
               <th className='actions'>Boshqaruv</th>
@@ -155,45 +161,24 @@ function GroupTable() {
               <td> <Spinner animation="border" /></td>
             </tr>}
 
-            {filteredResults.length > 0 ? (
-              filteredResults.map((peopleTable, index) => (
-                <Link to={`/adminBody/${peopleTable._id}`}>
-                  <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{peopleTable[index + 1]}</td>
-                    <td>{peopleTable.groupName}</td>
-                    <td>{peopleTable.subName}</td>
-                    <td>{peopleTable.techName}</td>
-                    <td>{peopleTable.classRoom}</td>
-                    <td>{peopleTable.lessDay}</td>
-                    <td>{peopleTable.lessTime}</td>
+            {
+              data ? data.map((item, index) => (
+                <Link to={`/adminBody/${item._id}`} >
+                  <tr className='tr' key={item.id}>
+                    <td>{index + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.direction}</td>
+                    <td>sa</td>
+                    <td>{item.pupils.length} ta</td>
+                    <td>{item.days}</td>
+                    <td>{item.time}</td>
+                    <td></td>
                   </tr>
                 </Link>
-              ))
-            ) : (
-              searchValues.category1 === "" ? (
-                records.map((peopleTable, index) => (
-                  <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{index + 1}</td>
-                    <td>{peopleTable.groupName}</td>
-                    <td>{peopleTable.subName}</td>
-                    <td>{peopleTable.techName}</td>
-                    <td>{peopleTable.classRoom}</td>
-                    <td>{peopleTable.lessDay}</td>
-                    <td>{peopleTable.lessTime}</td>
-                    <td className='actions'>
-                      {/* <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button> */}
-                      <Link to={`/adminBody/${peopleTable._id}`}>
-                        <button className='visible'><MdVisibility /></button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className={isNightMode ? 'nfound' : 'nfound dark'}>No information found</td>
-                </tr>
-              )
-            )}
+              )) : <tr>
+                <td colSpan="7" className={isNightMode ? 'nfound' : 'nfound dark'}>No information found</td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>

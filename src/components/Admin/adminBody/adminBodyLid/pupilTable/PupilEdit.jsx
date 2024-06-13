@@ -1,7 +1,7 @@
 import React from 'react';
 import './Pupil.css'
 
-function PupilEdit({data}) {
+function AddGroup({data}) {
   return (
     <div className='pupil'>
       <div className="pupil__card">
@@ -12,11 +12,11 @@ function PupilEdit({data}) {
           <p><span>Telefon raqami :</span> {data.pNumber}</p>
           <p><span>Ota-onasining telefon r :</span> {data.parentsNumber}</p>
           <p><span>Manzili :</span> {data.address}</p>
-          <p><span>Fanlar soni :</span> {data.subjects.length} ta</p>
+          <p><span>Fan nomi :</span> {data.subject.name}</p>
         </div>
       </div>
     </div>
   )
 }
 
-export default PupilEdit
+export default AddGroup

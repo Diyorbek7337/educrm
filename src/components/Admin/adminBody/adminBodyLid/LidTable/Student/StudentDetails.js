@@ -1,24 +1,97 @@
 // StudentDetails.js
 import "./student.css"
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { useTheme } from "../../../../../context/ThemeContext";
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import EditModal from "./EditModal";
-import Overlay from 'react-bootstrap/Overlay';
-import Tooltip from 'react-bootstrap/Tooltip';
 import FetchGet from "../../../../../context/FetchGet";
+
 
 function StudentDetails({ id }) {
   const [student, setStudent] = useState();
+  const [visible, setVisible] = useState(false);
   const { isNightMode } = useTheme();
   const URL = `https://otviz-backend.vercel.app/lids/${id}`;
   const [loader, setLoader] = useState(true);
-  const [showToolTip, setShowToolTip] = useState(false);
-  const target = useRef(null);
-  const {data} = FetchGet("https://otviz-backend.vercel.app/groups");
-  console.log("groups", data);
+
+  const [selectedDays, setSelectedDays] = useState([]);
+  const [scheduleType, setScheduleType] = useState("");
+  const [weeklyClasses, setWeeklyClasses] = useState('');
+  const [disableWeeklyClasses, setDisableWeeklyClasses] = useState(false);
+  const {data} = FetchGet("https://otviz-backend.vercel.app/groups")
+
+
+  const dayAbbreviations = {
+    Dushanba: 'Dush',
+    Seshanba: 'Sesh',
+    Chorshanba: 'Chor',
+    Payshanba: 'Pay',
+    Juma: 'Jum',
+    Shanba: 'Shan'
+  };
+
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    if (checked) {
+      if (selectedDays.length < weeklyClasses) {
+        setSelectedDays((prevSelectedDays) => [...prevSelectedDays, name]);
+      } else {
+        alert('Tanlangan kunlar soni haftadagi darslar sonidan oshmasligi kerak.');
+      }
+    } else {
+      setSelectedDays((prevSelectedDays) => prevSelectedDays.filter((day) => day !== name));
+    }
+  };
+
+  const removeDay = (day) => {
+    setSelectedDays((prevSelectedDays) => prevSelectedDays.filter(selectedDay => selectedDay !== day));
+    const dayName = Object.keys(dayAbbreviations).find(key => dayAbbreviations[key] === day);
+    if (dayName) {
+      document.getElementById(dayName.toLowerCase()).checked = false;
+    }
+  };
+
+
+  const handleScheduleTypeChange = (event) => {
+    const { value } = event.target;
+    setScheduleType(value);
+
+    if (value === "toq") {
+      setSelectedDays(["Dush", "Chor", "Jum"]);
+    } else if (value === "juft") {
+      setSelectedDays(["Sesh", "Pay", "Shan"]);
+    } else {
+      setSelectedDays([]);
+    }
+  };
+
+  useEffect(() => {
+    if (scheduleType === 'toq' || scheduleType === 'juft') {
+      setDisableWeeklyClasses(true);
+    } else {
+      setDisableWeeklyClasses(false);
+    }
+  }, [scheduleType]);
+
+  const handleWeeklyClassesChange = (event) => {
+    const { value } = event.target;
+    if (parseInt(value) > 0 && parseInt(value) < 7) { // Qiymat 0 dan katta bo'lishini tekshiramiz
+      setWeeklyClasses(parseInt(value));
+    }
+
+  };
+
+
+
+  useEffect(() => {
+    if (scheduleType === 'boshqa') {
+      setSelectedDays([]);
+    }
+  }, [weeklyClasses]);
+
+
+
+  
 
   const [numberWords, setNumberWords] = useState();
   function numberToWords(numberWords) {
@@ -133,7 +206,7 @@ function StudentDetails({ id }) {
     return <div>Loading...</div>;
   }
 
- 
+
 
   return (
     <div className="lidDetailBox">
@@ -180,107 +253,21 @@ function StudentDetails({ id }) {
           </div>
         </div>
         <div className="lidDetailBodyRight">
-          <div className="lidDetailRightTop">
-            <div className="lidDetailRightTopTitle">
-              <p className="lidDetailBodyLeftBodyItemTitle aboutCourse">Kurs haqida</p>
-            </div>
-            <div className="lidDetailRightTopContent">
-              <Form>
-                <div className="lidDetailRightTopContentItem">
-                  <div className='formGroupSelect lidDetailForm'>
-                    <Form.Label className="lidDetailLabel"><span>*</span> O'quv holati</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
-                      <option className="lidDetailSelectTitle">Tanlash</option>
-                      <option value="boshlamagan">Hali boshlamagan</option>
-                      <option value="oqimoqda">Ayni vaqtda o'qimoqda</option>
-                      <option value="yakunlagan">Yakunlagan</option>
-                      <option value="Tashlab ketgan">Tashlab ketgan</option>
-                    </Form.Select>
-                  </div>
-                  <div className='formGroupSelect lidDetailForm'>
-                    <Form.Label className="lidDetailLabel"><span>*</span> Kurs muddati</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
-                      <option className="lidDetailSelectTitle">Tanlash</option>
-                      <option value="one">1</option>
-                      <option value="two">2</option>
-                      <option value="three">3</option>
-                      <option value="four">4</option>
-                      <option value="five">5</option>
-                      <option value="six">6</option>
-                      <option value="seven">7</option>
-                      <option value="eight">8</option>
-                      <option value="nine">9</option>
-                      <option value="ten">10</option>
-                      <option value="eleven">11</option>
-                      <option value="twelve">12</option>
-                    </Form.Select>
-                  </div>
-                  <div className='formGroupSelect lidDetailForm'>
-                    <Form.Label className="lidDetailLabel"><span>*</span> Kurs narxi</Form.Label>
-                    <Form.Group controlId="formBasicAddress">
-                      <Form.Control type="text" placeholder="Kurs narxi" required value={numberWords} onChange={(e) => setNumberWords(e.target.value)} />
-                      <p className="wordNumber">{wordForm} so'm</p>
-                    </Form.Group>
-                  </div>
-                  <div className='formGroupSelect lidDetailForm'>
-                    <Form.Label className="lidDetailLabel"><span>*</span> Guruh nomi</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
-                      <option className="lidDetailSelectTitle">Tanlash</option>
-                      {
-                        data.map((item) => (
-                          <option value={item._id}>{item.name}</option>
-                        ))
-                      }
-                    </Form.Select>
-                  </div>
-
+          <Form.Select >
+            <option disabled selected>Guruhni tanlash</option>
+            {
+              data.map((item) => (
+                <option value={item._id}>{item.name}</option>
+              ))
+            }
+          </Form.Select>
+          <div className='formGroupSelect lidDetailForm mt-3'>
+                  <Form.Label className="lidDetailLabel"><span>*</span> Kurs narxi</Form.Label>
+                  <Form.Group controlId="formBasicAddress">
+                    <Form.Control type="text" placeholder="Kurs narxi" required value={numberWords} onChange={(e) => setNumberWords(e.target.value)} />
+                    <p className="wordNumber">{wordForm} so'm</p>
+                  </Form.Group>
                 </div>
-              </Form>
-
-            </div>
-          </div>
-          <div className="lidDetailRightBottom">
-            <div className="lidDetailRightTopTitle">
-              <p className="lidDetailBodyLeftBodyItemTitle aboutCourse">Davomat</p>
-            </div>
-            <div className="lidDetailRightBottomContent">
-              <Form>
-                <div className="lidDetailRightTopContentItem lidDetailRightTopContentItemBottom">
-                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom'>
-                    <Form.Label className="lidDetailLabel"><span>*</span> Jadval turi</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
-                      <option className="lidDetailSelectTitle">Tanlash</option>
-                      <option value="boshlamagan">Haftaning toq kunlari</option>
-                      <option value="oqimoqda">Haftaning juft kunlari</option>
-                      <option value="yakunlagan">Hafta kunlarini tanlash</option>
-                    </Form.Select>
-                  </div>
-                  <div className="formGroupSelect lidDetailForm lidDetailFormBottom">
-                    <Form.Label className="lidDetailLabel"><span>*</span> Bir haftadagi darslar soni</Form.Label>
-                    <div className="formRadioGroup">
-                      <div className="formRadioItem">
-                        <Form.Check type="radio" id="radio1" aria-label="radio 1" name="radio" />
-                        <Form.Label for="radio1" className="radioLabel lidDetailLabel">1 marta</Form.Label>
-                      </div>
-                      <div className="formRadioItem">
-                        <Form.Check id="radio2" type="radio" aria-label="radio 1" name="radio" />
-                        <Form.Label for="radio2" className="radioLabel lidDetailLabel">2 marta</Form.Label>
-                      </div>
-                      <div className="formRadioItem">
-                        <Form.Check id="radio3" type="radio" aria-label="radio 1" name="radio" />
-                        <Form.Label for="radio3" className="radioLabel lidDetailLabel">3 marta</Form.Label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='formGroupSelect lidDetailForm lidDetailFormBottom'>
-                    <Form.Label className="lidDetailLabel"><span>*</span> Hafta kunlari</Form.Label>
-                    <span className="btnHafta" onClick={() => setShowToolTip(!showToolTip)}>Hafta kunlarini tanlang</span>
-                    
-                  </div>
-                </div>
-              </Form>
-            </div>
-          </div>
         </div>
       </div>
     </div>

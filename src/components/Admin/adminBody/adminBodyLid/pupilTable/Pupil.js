@@ -145,18 +145,18 @@ function Pupil() {
               </td>
             </tr>
               {
-                data.map((students, id) => (
-                  <tr key={id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{id + 1}</td>
+                data ? data.map((students, index) => (
+                  <tr className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
+                    <td>{index + 1}</td>
                     <td>{students.name}</td>
                     <td>{students.surname}</td>
                     <td>{students.pNumber}</td>
                     <td>{students.name}</td>
-                    <td>{students.subjects.length}</td>
                     <td>{students.parentsNumber}</td>
                     <td><Link to={`/adminBody/${students._id}`}><MdVisibility /></Link></td>
                   </tr>
-                ))}
+                )) : ""
+                }
             </tbody>
           </table>
         </div>
