@@ -1,14 +1,22 @@
+import React,{useState} from "react";
 import React, { useState } from "react";
-
 import Table from "react-bootstrap/Table";
 import "../LidTable/lidTable.css";
 import Student from "../../../../json files/student.json";
 import { useSearchPupil } from "../../../../context/SearchStudentContext";
 import { useTheme } from "../../../../context/ThemeContext";
+import FetchGet from "../../../../context/FetchGet";
+import { Link } from "react-router-dom";
+import { MdVisibility } from "react-icons/md";
 function Pupil() {
 
-  const { isNightMode } = useTheme()
-  const { searchValues, handleInputChange, filteredResults } = useSearchPupil()
+
+  const {data} = FetchGet("https://otviz-backend.vercel.app/pupils")
+
+
+  const {isNightMode} = useTheme()
+  const {searchValues, handleInputChange } = useSearchPupil()
+  console.log(data);
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 12;
@@ -58,6 +66,87 @@ function Pupil() {
           <table className={isNightMode ? "tables" : "tables darks"}>
             <thead>
               <tr className={isNightMode ? 'tr' : 'tr dark'}>
+                <th className="tartib">No.</th>
+                <th className="ism">Ism</th>
+                <th className="familiya">Familiya</th>
+                <th className="raqam">Telefon raqam</th>
+                <th className="haqida">Ustoz</th>
+                <th className="guruh">Fanlar</th>
+                <th className="sinov">To'lov</th>
+                <th className="btns">Buttons</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr className={isNightMode ? "searchRow" : "searchRow dark"}>
+              <td className="tartib"></td>
+              <td>
+                <input
+                  type="text"
+                  name="searchLid"
+                  className="searchLid"
+                  id="searchLidName"
+                  placeholder="...Izlash"
+                  value={searchValues.category1}
+                  onChange={(e) => handleInputChange(e, 'category1')}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  className="searchLid"
+                  name="searchLid"
+                  id="searchLidFname"
+                  value={searchValues.category2}
+                  onChange={(e) => handleInputChange(e, 'category2')}
+                  placeholder="...Izlash"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="searchLid"
+                  className="searchLid"
+                  id="searchLidPhone"
+                  value={searchValues.category3}
+                  onChange={(e) => handleInputChange(e, 'category3')}
+                  placeholder="...Izlash"
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="searchLid"
+                  className="searchLid"
+                  id="searchLidAbout"
+                  placeholder="...Izlash"
+                  value={searchValues.category4}
+                  onChange={(e) => handleInputChange(e, 'category4')}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="searchLid"
+                  className="searchLid"
+                  id="searchLidSubject"
+                  placeholder="...Izlash"
+                  value={searchValues.category5}
+                  onChange={(e) => handleInputChange(e, 'category5')}
+                />
+              </td>
+              <td>
+                <input
+                  type="text"
+                  name="searchLid"
+                  className="searchLid"
+                  id="searchLidDate"
+                  placeholder="...Izlash"
+                  value={searchValues.category6}
+                  onChange={(e) => handleInputChange(e, 'category6')}
+                  
+                />
+              </td>
+            </tr>
                 <th className="tartib tab__1">No.</th>
                 <th className="ism tab__2">Ism</th>
                 <th className="familiya tab__3">Familiya</th>
@@ -161,12 +250,8 @@ function Pupil() {
                     <td className="tab__6">{students.fanlar}</td>
                     <td className="tab__7">{students.tolov}</td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7">No information found</td>
-                </tr>
-              )}
+                )) : ""
+                }
             </tbody>
           </table>
         </div>

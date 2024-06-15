@@ -7,10 +7,13 @@ import { PiSealCheckFill } from "react-icons/pi";
 import { Link, NavLink } from 'react-router-dom';
 import { MdVisibility } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
-import GroupJson from "../../../../json files/groups.json"
+import GroupJson from "../../../../json files/groups.json";
+import FetchGet from '../../../../context/FetchGet'
+import './groupTable.css';
 
 function GroupTable() {
   const { deleteData, PeopleTables, loader, showWarning, showDelete } = useAddDataLid()
+  const { data } = FetchGet("https://otviz-backend.vercel.app/groups");
 
   const { searchValues, handleInputChange, filteredResults } = useSearch()
   const { isNightMode } = useTheme("")
@@ -41,6 +44,9 @@ function GroupTable() {
     <div className='groupTable'>
       <div className={isNightMode ? 'lidHeaderSecond' : 'lidHeaderSecond dark'}>
         <h2 className={isNightMode ? 'titleLists' : 'titleLists dark'}>Guruhlar ro'yhati</h2>
+        <div>
+          <Link to={"/adminbody/addgroup"}>Guruh qo'shish</Link>
+        </div>
         <ul className="pagination">
           <li className="page-item">
             <a href="#" className={isNightMode ? "page-link" : "page-link dark"} onClick={prePage}>Prev</a>
@@ -68,6 +74,14 @@ function GroupTable() {
         <table className={isNightMode ? "tables" : "tables darks"}>
           <thead>
             <tr className={isNightMode ? 'tr' : 'tr dark'}>
+              <th className='tartib'>No.</th>
+              <th className='ism'>Guruh nomi</th>
+              <th className="familiya">Fan nomi</th>
+              <th className="raqam">O'qituvchi F.I.SH</th>
+              <th className="haqida">O'quvchilar soni</th>
+              <th className="guruh">Dars kunlari</th>
+              <th className="sinov">Dars vaqti</th>
+              <th className='actions'>Boshqaruv</th>
               <th className='tab__1 tartib'>No.</th>
               <th className='tab__2 ism'>Guruh nomi</th>
               <th className="tab__3 familiya">Fan nomi</th>
@@ -76,6 +90,7 @@ function GroupTable() {
               <th className="tab__6 guruh">Dars kunlari</th>
               <th className="tab__7 sinov">Dars vaqti</th>
               <th className='tab__8 actions'></th>
+
             </tr>
           </thead>
           <tbody>
@@ -153,6 +168,24 @@ function GroupTable() {
               <td className='tab__7'> <Spinner animation="border" /></td>
             </tr>}
 
+            {
+              data ? data.map((item, index) => (
+                <Link to={`/adminBody/${item._id}`} >
+                  <tr className='tr' key={item.id}>
+                    <td>{index + 1}</td>
+                    <td>{item.name}</td>
+                    <td>{item.direction}</td>
+                    <td>sa</td>
+                    <td>{item.pupils.length} ta</td>
+                    <td>{item.days}</td>
+                    <td>{item.time}</td>
+                    <td></td>
+                  </tr>
+                </Link>
+              )) : <tr>
+                <td colSpan="7" className={isNightMode ? 'nfound' : 'nfound dark'}>No information found</td>
+              </tr>
+            }
             {filteredResults.length > 0 ? (
               filteredResults.map((peopleTable, index) => (
                 <Link to={`/adminBody/${peopleTable._id}`}>
