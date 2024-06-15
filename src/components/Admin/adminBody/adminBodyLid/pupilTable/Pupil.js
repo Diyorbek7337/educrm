@@ -1,10 +1,6 @@
-
 import React,{useState} from "react";
-
 import React, { useState } from "react";
-
 import Table from "react-bootstrap/Table";
-
 import "../LidTable/lidTable.css";
 import Student from "../../../../json files/student.json";
 import { useSearchPupil } from "../../../../context/SearchStudentContext";
@@ -13,6 +9,8 @@ import FetchGet from "../../../../context/FetchGet";
 import { Link } from "react-router-dom";
 import { MdVisibility } from "react-icons/md";
 function Pupil() {
+
+
   const {data} = FetchGet("https://otviz-backend.vercel.app/pupils")
 
 
@@ -68,7 +66,6 @@ function Pupil() {
           <table className={isNightMode ? "tables" : "tables darks"}>
             <thead>
               <tr className={isNightMode ? 'tr' : 'tr dark'}>
-
                 <th className="tartib">No.</th>
                 <th className="ism">Ism</th>
                 <th className="familiya">Familiya</th>
@@ -150,16 +147,6 @@ function Pupil() {
                 />
               </td>
             </tr>
-              {
-                data ? data.map((students, index) => (
-                  <tr className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td>{index + 1}</td>
-                    <td>{students.name}</td>
-                    <td>{students.surname}</td>
-                    <td>{students.pNumber}</td>
-                    <td>{students.name}</td>
-                    <td>{students.parentsNumber}</td>
-                    <td><Link to={`/adminBody/${students._id}`}><MdVisibility /></Link></td>
                 <th className="tartib tab__1">No.</th>
                 <th className="ism tab__2">Ism</th>
                 <th className="familiya tab__3">Familiya</th>
