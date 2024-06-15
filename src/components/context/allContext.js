@@ -5,6 +5,7 @@ import { SearchProvider } from "./SearchContext";
 import { SearchPupilProvider } from "./SearchStudentContext";
 import { ScheduleProvider } from "./addSchedule";
 import { ModalProvider } from "./Addmodal";
+import { StudentProvider } from "./StudentContext";
 
 
 
@@ -16,7 +17,9 @@ export const CombinedProviders = ({ children }) => {
             <SearchProvider>
               <SearchPupilProvider>
                 <ScheduleProvider>
-                  {children}
+                  <StudentProvider>
+                    {children}
+                  </StudentProvider>
                 </ScheduleProvider>
               </SearchPupilProvider>
             </SearchProvider>

@@ -1,4 +1,6 @@
 import React, {createContext, useState, useContext, useEffect} from "react";
+import { useStudentContext } from './StudentContext';
+
 
 
 const ScheduleAdd = createContext();
@@ -8,12 +10,14 @@ export const useSchedule = () => {
 }
 
 export const ScheduleProvider = ({children}) => {
+
+
     const [selectedDays, setSelectedDays] = useState([]);
     const [scheduleType, setScheduleType] = useState("");
     const [weeklyClasses, setWeeklyClasses] = useState('');
     const [disableWeeklyClasses, setDisableWeeklyClasses] = useState(false);
 
-
+ 
 
     const dayAbbreviations = {
         Dushanba: 'Dush',
@@ -53,8 +57,10 @@ export const ScheduleProvider = ({children}) => {
     
         if (value === "toq") {
           setSelectedDays(["Dush", "Chor", "Jum"]);
+          setWeeklyClasses(3);
         } else if (value === "juft") {
           setSelectedDays(["Sesh", "Pay", "Shan"]);
+          setWeeklyClasses(3);
         }
         else if (value === "tanlash") {
           setSelectedDays([]);

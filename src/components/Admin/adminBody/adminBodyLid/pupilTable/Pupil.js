@@ -7,8 +7,8 @@ import { useTheme } from "../../../../context/ThemeContext";
 import FetchGet from "../../../../context/FetchGet";
 import { Link } from "react-router-dom";
 import { MdVisibility } from "react-icons/md";
-function Pupil() {
 
+function Pupil() {
 
   const {data} = FetchGet("https://otviz-backend.vercel.app/pupils")
 
@@ -38,7 +38,6 @@ function Pupil() {
       setCurrentPage(currentPage + 1)
     }
   }
-
 
   return (
     <div>
@@ -146,117 +145,31 @@ function Pupil() {
                 />
               </td>
             </tr>
-                <th className="tartib tab__1">No.</th>
-                <th className="ism tab__2">Ism</th>
-                <th className="familiya tab__3">Familiya</th>
-                <th className="raqam tab__4">Telefon raqam</th>
-                <th className="haqida tab__5">Ustoz</th>
-                <th className="guruh tab__6">Fanlar</th>
-                <th className="sinov tab__7">To'lov</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className={isNightMode ? "searchRow" : "searchRow dark"}>
-                <td className="tartib tab__1"></td>
-                <td className="tab__2">
-                  <input
-                    type="text"
-                    name="searchLid"
-                    className="searchLid"
-                    id="searchLidName"
-                    placeholder="...Izlash"
-                    value={searchValues.category1}
-                    onChange={(e) => handleInputChange(e, 'category1')}
-                  />
-                </td>
-                <td className="tab__3">
-                  <input
-                    type="text"
-                    className="searchLid"
-                    name="searchLid"
-                    id="searchLidFname"
-                    value={searchValues.category2}
-                    onChange={(e) => handleInputChange(e, 'category2')}
-                    placeholder="...Izlash"
-                  />
-                </td>
-                <td className="tab__4">
-                  <input
-                    type="text"
-                    name="searchLid"
-                    className="searchLid"
-                    id="searchLidPhone"
-                    value={searchValues.category3}
-                    onChange={(e) => handleInputChange(e, 'category3')}
-                    placeholder="...Izlash"
-                  />
-                </td>
-                <td className="tab__5">
-                  <input
-                    type="text"
-                    name="searchLid"
-                    className="searchLid"
-                    id="searchLidAbout"
-                    placeholder="...Izlash"
-                    value={searchValues.category4}
-                    onChange={(e) => handleInputChange(e, 'category4')}
-                  />
-                </td>
-                <td className="tab__6">
-                  <input
-                    type="text"
-                    name="searchLid"
-                    className="searchLid"
-                    id="searchLidSubject"
-                    placeholder="...Izlash"
-                    value={searchValues.category5}
-                    onChange={(e) => handleInputChange(e, 'category5')}
-                  />
-                </td>
-                <td className="tab__7">
-                  <input
-                    type="text"
-                    name="searchLid"
-                    className="searchLid"
-                    id="searchLidDate"
-                    placeholder="...Izlash"
-                    value={searchValues.category6}
-                    onChange={(e) => handleInputChange(e, 'category6')}
 
-                  />
-                </td>
-              </tr>
-              {filteredResults.length > 0 ? (
-                filteredResults.map((students, id) => (
-                  <tr key={students.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td className="tab__1">{students.id}</td>
-                    <td className="tab__2">{students.name}</td>
-                    <td className="tab__3">{students.surname}</td>
-                    <td className="tab__4">{students.raqam}</td>
-                    <td className="tab__5">{students.ustoz}</td>
-                    <td className="tab__6">{students.fanlar}</td>
-                    <td className="tab__7">{students.tolov}</td>
-                  </tr>
-                ))
-              ) : searchValues.category1 === "" ? (
-                Student.map((students, id) => (
-                  <tr key={id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td className="tab__1">{id + 1}</td>
-                    <td className="tab__2">{students.name}</td>
-                    <td className="tab__3">{students.surname}</td>
-                    <td className="tab__4">{students.raqam}</td>
-                    <td className="tab__5">{students.ustoz}</td>
-                    <td className="tab__6">{students.fanlar}</td>
-                    <td className="tab__7">{students.tolov}</td>
-                  </tr>
-                )) : ""
+                {
+                  data.map((item, index) => (
+                    <tr key={item._id}>
+                      <td>{index + 1}</td>
+                      <td>{item.name}</td>
+                      <td>{item.surname}</td>
+                      <td>{item.pNumber}</td>
+                      <td>{item.sub}</td>
+                      <td>{item.sub}</td>
+                      <td>{item.sub}</td>
+                      <td>
+                        <Link to={`/admin/pupil/${item._id}`}>
+                          <MdVisibility />
+                        </Link>
+                      </td>
+                    </tr>
+                  ))
                 }
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Pupil;
+export default Pupil

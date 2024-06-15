@@ -45,6 +45,12 @@ function LeftSideBar() {
                             setShow(false)
                         }}><FaUsers className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>Guruhlar</span></li>
                     </NavLink>
+                    <NavLink to='teacher'>
+                        <li className='leftMenuItem' onClick={() => {
+                            handleItemClick('teacher')
+                            setShow(false)
+                        }}><FaUsers className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /><span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>O'qituvchilar</span></li>
+                    </NavLink>
                 </ul>
                 <NavLink to='/login'>
                     <div className='leftMenuItem logout__button'><BiLogOut className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'} /> <span className={isNightMode ? 'darkleftColor' : 'darkleftColor dark'}>Chiqish</span></div>
