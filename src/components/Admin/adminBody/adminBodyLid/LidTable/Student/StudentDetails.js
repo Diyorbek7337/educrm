@@ -5,6 +5,7 @@ import { useTheme } from "../../../../../context/ThemeContext";
 import Form from 'react-bootstrap/Form';
 import EditModal from "./EditModal";
 import { useSchedule } from "../../../../../context/addSchedule";
+import { useStudentContext } from "../../../../../context/StudentContext";
 import TimePicker from "./TimePicker/TimePicker";
 
 
@@ -16,11 +17,16 @@ function StudentDetails({ id }) {
   const [loader, setLoader] = useState(true);
 
  const { dayAbbreviations, selectedDays, scheduleType, weeklyClasses, handleCheckboxChange, removeDay, handleScheduleTypeChange, handleWeeklyClassesChange, disableWeeklyClasses} = useSchedule();
-  
+
+ console.log( selectedDays, scheduleType, weeklyClasses, )
+ 
+const {studentData, handleInputChangeDataStudent} = useStudentContext();
 
 
 
   const [numberWords, setNumberWords] = useState();
+
+ 
   function numberToWords(numberWords) {
     const units = ['', 'bir', 'ikki', 'uch', "to'rt", 'besh', 'olti', 'yetti', 'sakkiz', "to'qqiz"];
     const teens = ['', "o'n bir", "o'n ikki", "o'n uch", "o'n to'rt", "o'n besh", "o'n olti", "o'n yetti", "o'n sakkiz", "o'n to'qqiz"];
@@ -133,7 +139,7 @@ function StudentDetails({ id }) {
     return <div>Loading...</div>;
   }
 
-
+console.log(studentData.jadvalTuri)
 
   return (
     <div className="lidDetailBox">
@@ -189,7 +195,7 @@ function StudentDetails({ id }) {
                 <div className="lidDetailRightTopContentItem">
                   <div className='formGroupSelect lidDetailForm'>
                     <Form.Label className="lidDetailLabel"><span>*</span> O'quv holati</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
+                    <Form.Select aria-label="Default select example" required value={studentData.status} onChange={(e) => handleInputChangeDataStudent(e, 'status')}>
                       <option className="lidDetailSelectTitle">Tanlash</option>
                       <option value="boshlamagan">Hali boshlamagan</option>
                       <option value="oqimoqda">Ayni vaqtda o'qimoqda</option>
@@ -199,7 +205,7 @@ function StudentDetails({ id }) {
                   </div>
                   <div className='formGroupSelect lidDetailForm'>
                     <Form.Label className="lidDetailLabel"><span>*</span> Kurs muddati</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
+                    <Form.Select aria-label="Default select example" required value={studentData.duration} onChange={(e) => handleInputChangeDataStudent(e, 'duration')}>
                       <option className="lidDetailSelectTitle">Tanlash</option>
                       <option value="one">1</option>
                       <option value="two">2</option>
@@ -224,7 +230,7 @@ function StudentDetails({ id }) {
                   </div>
                   <div className='formGroupSelect lidDetailForm'>
                     <Form.Label className="lidDetailLabel"><span>*</span> Guruh nomi</Form.Label>
-                    <Form.Select aria-label="Default select example" required >
+                    <Form.Select aria-label="Default select example" required value={studentData.groupName} onChange={(e) => handleInputChangeDataStudent(e, 'groupName')}>
                       <option className="lidDetailSelectTitle">Tanlash</option>
                       <option value="guruh1">1-guruh</option>
                       <option value="guruh2">2-guruh</option>
