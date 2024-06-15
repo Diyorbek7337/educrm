@@ -11,12 +11,27 @@ import { useAddDataLid } from "./components/context/AddDataLidsFromModal";
 import FetchGet from "./components/context/FetchGet";
 import PupilEdit from "./components/Admin/adminBody/adminBodyLid/pupilTable/PupilEdit";
 import AddGroup from "./components/Admin/adminBody/adminBodyLid/groupTable/AddGroup";
+import "./components/css/normalize.css"
+import "./components/css/responsive.css"
 
 function App() {
   const { data } = FetchGet("https://otviz-backend.vercel.app/pupils")
   // const groups = FetchGet("https://otviz-backend.vercel.app/groups").data;
 
   const { PeopleTables } = useAddDataLid();
+
+  const pupil = {
+    name: "akbar",
+    surname: "ali",
+    address: "ibn sino",
+    born: "2000",
+    pNumber: "+998-(99)-999-99-99",
+    parentsNumber: "+998-(99)-999-99-99",
+    sub1: "eng",
+    sub2: "frontend",
+    freeTime: "15:00 - 17:00",
+    date: "22-22-2222"
+  }
 
   return (
     <div className="App">
@@ -31,6 +46,7 @@ function App() {
             />
           ))}
           <Route path={"addgroup"} element={<AddGroup />} />
+
           {PeopleTables.map((data) => (
             <Route
               key={data._id}
@@ -38,6 +54,8 @@ function App() {
               element={<StudentDetails id={data._id} />} // Pass id as prop to StudentDetails
             />
           ))}
+
+
 
           <Route path="lid" element={<LidTable />} />
 

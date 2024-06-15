@@ -261,7 +261,7 @@ function StudentDetails({ id }) {
               ))
             }
           </Form.Select>
-          <div className='formGroupSelect lidDetailForm mt-3'>
+          <div className='formGroupSelect lidDetailForm mt-2'>
                   <Form.Label className="lidDetailLabel"><span>*</span> Kurs narxi</Form.Label>
                   <Form.Group controlId="formBasicAddress">
                     <Form.Control type="text" placeholder="Kurs narxi" required value={numberWords} onChange={(e) => setNumberWords(e.target.value)} />

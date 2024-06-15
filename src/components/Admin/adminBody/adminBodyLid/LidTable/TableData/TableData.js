@@ -81,20 +81,20 @@ function TableData() {
         <table className={isNightMode ? "tables" : "tables darks"}>
           <thead>
             <tr className={isNightMode ? 'tr' : 'tr dark'}>
-              <th className='tartib'>No.</th>
-              <th className='ism'>Ism</th>
-              <th className="familiya">Familiya</th>
-              <th className="raqam">Telefon raqam</th>
-              <th className="haqida">Markaz haqida</th>
-              <th className="guruh">Fanlar</th>
-              <th className="sinov">Bo'sh vaqt</th>
-              <th className='actions'>Actions</th>
+              <th className='tartib tab__1'>No.</th>
+              <th className='ism tab__2'>Ism</th>
+              <th className="familiya tab__3">Familiya</th>
+              <th className="raqam tab__4">Telefon raqam</th>
+              <th className="haqida tab__5">Markaz haqida</th>
+              <th className="guruh tab__6">Fanlar</th>
+              <th className="sinov tab__7">Bo'sh vaqt</th>
+              <th className='actions tab__8'></th>
             </tr>
           </thead>
           <tbody>
             <tr className={isNightMode ? "searchRow" : "searchRow dark"}>
               <td className="tartib"></td>
-              <td>
+              <td className='tab__2'>
                 <input
                   type="text"
                   name="searchLid"
@@ -105,7 +105,7 @@ function TableData() {
                   onChange={(e) => handleInputChange(e, 'category1')}
                 />
               </td>
-              <td>
+              <td className='tab__3'>
                 <input
                   type="text"
                   className="searchLid"
@@ -116,7 +116,7 @@ function TableData() {
                   placeholder="...Izlash"
                 />
               </td>
-              <td>
+              <td className='tab__4'>
                 <input
                   type="text"
                   name="searchLid"
@@ -127,7 +127,7 @@ function TableData() {
                   placeholder="...Izlash"
                 />
               </td>
-              <td>
+              <td className='tab__5'>
                 <input
                   type="text"
                   name="searchLid"
@@ -138,7 +138,7 @@ function TableData() {
                   onChange={(e) => handleInputChange(e, 'category4')}
                 />
               </td>
-              <td>
+              <td className='tab__6'>
                 <input
                   type="text"
                   name="searchLid"
@@ -149,7 +149,7 @@ function TableData() {
                   onChange={(e) => handleInputChange(e, 'category5')}
                 />
               </td>
-              <td>
+              <td className='tab__7'>
                 <input
                   type="text"
                   name="searchLid"
@@ -171,13 +171,13 @@ function TableData() {
                 <Link to={`/adminBody/${peopleTable._id}`}>
                   <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
 
-                    <td>{peopleTable[index + 1]}</td>
-                    <td>{peopleTable.name}</td>
-                    <td>{peopleTable.surname}</td>
-                    <td>{peopleTable.pNumber}</td>
-                    <td>{peopleTable.about}</td>
-                    <td>{peopleTable.sub1}</td>
-                    <td>{peopleTable.free}</td>
+                    <td className='tab__1'>{peopleTable[index + 1]}</td>
+                    <td className='tab__2'>{peopleTable.name}</td>
+                    <td className='tab__3'>{peopleTable.surname}</td>
+                    <td className='tab__4'>{peopleTable.pNumber}</td>
+                    <td className='tab__5'>{peopleTable.about}</td>
+                    <td className='tab__6'>{peopleTable.sub1}</td>
+                    <td className='tab__7'>{peopleTable.free}</td>
 
                   </tr>
                 </Link>
@@ -185,37 +185,21 @@ function TableData() {
             ) : (
               searchValues.category1 === "" ? (
                 records.map((peopleTable, index) => (
-                  <>
-                    <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                      <td>{index + 1}</td>
-                      <td>{peopleTable.name}</td>
-                      <td>{peopleTable.surname}</td>
-                      <td>{peopleTable.pNumber}</td>
-                      <td>{peopleTable.about}</td>
-                      <td>{peopleTable.sub1}</td>
-                      <td>{peopleTable.free}</td>
-                      <td className='actions'>
-                        <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>
-                        <Link to={`/adminBody/${peopleTable._id}`}>
-                          <button className='visible'><MdVisibility /></button>
-                        </Link>
-                      </td>
-                    </tr>{peopleTable.sub2 ? <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                      <td>{index + 1}</td>
-                      <td>{peopleTable.name}</td>
-                      <td>{peopleTable.surname}</td>
-                      <td>{peopleTable.pNumber}</td>
-                      <td>{peopleTable.about}</td>
-                      <td>{peopleTable.sub2}</td>
-                      <td>{peopleTable.free}</td>
-                      <td className='actions'>
-                        <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>
-                        <Link to={`/adminBody/${peopleTable._id}`}>
-                          <button className='visible'><MdVisibility /></button>
-                        </Link>
-                      </td>
-                    </tr> : ""}
-                  </>
+                  <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
+                    <td className='tab__1'>{index + 1}</td>
+                    <td className='tab__2'>{peopleTable.name}</td>
+                    <td className='tab__3'>{peopleTable.surname}</td>
+                    <td className='tab__4'>{peopleTable.pNumber}</td>
+                    <td className='tab__5'>{peopleTable.about}</td>
+                    <td className='tab__6'>{peopleTable.sub1}</td>
+                    <td className='tab__7'>{peopleTable.free}</td>
+                    <td className='actionstab tab__8'>
+                      <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button>
+                      <Link to={`/adminBody/${peopleTable._id}`}>
+                        <button className='visible'><MdVisibility /></button>
+                      </Link>
+                    </td>
+                  </tr>
                 ))
               ) : (
                 <tr>
