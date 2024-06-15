@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import "../LidTable/lidTable.css";
@@ -147,6 +147,7 @@ function Pupil() {
                 />
               </td>
             </tr>
+            <tr>
                 <th className="tartib tab__1">No.</th>
                 <th className="ism tab__2">Ism</th>
                 <th className="familiya tab__3">Familiya</th>
@@ -155,8 +156,8 @@ function Pupil() {
                 <th className="guruh tab__6">Fanlar</th>
                 <th className="sinov tab__7">To'lov</th>
               </tr>
-            </thead>
-            <tbody>
+           
+         
               <tr className={isNightMode ? "searchRow" : "searchRow dark"}>
                 <td className="tartib tab__1"></td>
                 <td className="tab__2">
@@ -250,8 +251,8 @@ function Pupil() {
                     <td className="tab__6">{students.fanlar}</td>
                     <td className="tab__7">{students.tolov}</td>
                   </tr>
-                )) : ""
-                }
+                )) ) : "" 
+              }
             </tbody>
           </table>
         </div>
