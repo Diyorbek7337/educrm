@@ -81,16 +81,7 @@ function GroupTable() {
               <th className="haqida">O'quvchilar soni</th>
               <th className="guruh">Dars kunlari</th>
               <th className="sinov">Dars vaqti</th>
-              <th className='actions'>Boshqaruv</th>
-              <th className='tab__1 tartib'>No.</th>
-              <th className='tab__2 ism'>Guruh nomi</th>
-              <th className="tab__3 familiya">Fan nomi</th>
-              <th className="tab__4 raqam">O'qituvchi F.I.SH</th>
-              <th className="tab__5 haqida">Xona</th>
-              <th className="tab__6 guruh">Dars kunlari</th>
-              <th className="tab__7 sinov">Dars vaqti</th>
-              <th className='tab__8 actions'></th>
-
+              <th className='actions'></th>
             </tr>
           </thead>
           <tbody>
@@ -170,7 +161,7 @@ function GroupTable() {
 
             {
               data ? data.map((item, index) => (
-                <Link to={`/adminBody/${item._id}`} >
+                
                   <tr className='tr' key={item.id}>
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
@@ -179,52 +170,14 @@ function GroupTable() {
                     <td>{item.pupils.length} ta</td>
                     <td>{item.days}</td>
                     <td>{item.time}</td>
-                    <td></td>
+                    <td><button className='visible'><MdVisibility /></button></td>
                   </tr>
-                </Link>
+            
               )) : <tr>
                 <td colSpan="7" className={isNightMode ? 'nfound' : 'nfound dark'}>No information found</td>
               </tr>
             }
-            {filteredResults.length > 0 ? (
-              filteredResults.map((peopleTable, index) => (
-                <Link to={`/adminBody/${peopleTable._id}`}>
-                  <tr key={peopleTable.id} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td className='tab__1'>{peopleTable[index + 1]}</td>
-                    <td className='tab__2'>{peopleTable.groupName}</td>
-                    <td className='tab__3'>{peopleTable.subName}</td>
-                    <td className='tab__4'>{peopleTable.techName}</td>
-                    <td className='tab__5'>{peopleTable.classRoom}</td>
-                    <td className='tab__6'>{peopleTable.lessDay}</td>
-                    <td className='tab__7'>{peopleTable.lessTime}</td>
-                  </tr>
-                </Link>
-              ))
-            ) : (
-              searchValues.category1 === "" ? (
-                records.map((peopleTable, index) => (
-                  <tr key={index} className={isNightMode ? 'recordsMap' : 'recordsMap dark'}>
-                    <td className='tab__1'>{index + 1}</td>
-                    <td className='tab__2'>{peopleTable.groupName}</td>
-                    <td className='tab__3'>{peopleTable.subName}</td>
-                    <td className='tab__4'>{peopleTable.techName}</td>
-                    <td className='tab__5'>{peopleTable.classRoom}</td>
-                    <td className='tab__6'>{peopleTable.lessDay}</td>
-                    <td className='tab__7'>{peopleTable.lessTime}</td>
-                    <td className='actionstab tab__8'>
-                      {/* <button className='delete' onClick={() => deleteData(peopleTable._id)}><MdDelete /></button> */}
-                      <Link to={`/adminBody/${peopleTable._id}`}>
-                        <button className='visible'><MdVisibility /></button>
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className={isNightMode ? 'nfound' : 'nfound dark'}>No information found</td>
-                </tr>
-              )
-            )}
+            
           </tbody>
         </table>
       </div>
